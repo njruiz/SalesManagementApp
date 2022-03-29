@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { RegisterComponent } from './register/register.component';
-import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'signin', component: SigninComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: AdminLayoutComponent,
@@ -26,11 +26,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes, { useHash: true }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
+    imports: [
+      CommonModule,
+      BrowserModule,
+      RouterModule.forRoot(routes,{
+         useHash: true
+      })
+    ],
+    exports: [
+    ],
+  })
+  export class AppRoutingModule { }

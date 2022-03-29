@@ -3,6 +3,7 @@
 ssl
 
 package-lock.json
+.angular
 
 # compiled output
 /dist
