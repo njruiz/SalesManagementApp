@@ -185,7 +185,7 @@ a {
   .sidebar .nav li.active > a,
   .sidebar .nav li.active > a:hover,
   .sidebar .nav li.active > a i {
-    background-color: #A95700;
+    background-color: #00a944;
     color: #fff;
   }
   
@@ -216,7 +216,7 @@ a {
   
   .sidebar .logo-img img {
     width: 40px;
-    top: 23px;
+    bottom: 15px;
     position: absolute;
   }
   
