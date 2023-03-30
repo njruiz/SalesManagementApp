@@ -6,10 +6,16 @@ import { ProductsComponent } from './products/products.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
-import { NavComponent } from './nav/nav.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [DashboardComponent, OrdersComponent, ProductsComponent, SidebarComponent, NavComponent],
+  declarations: [
+    DashboardComponent,
+    OrdersComponent,
+    ProductsComponent,
+    SidebarComponent,
+    HeaderComponent,
+  ],
   imports: [CommonModule, RouterModule, AngularMaterialModule],
   exports: [SidebarComponent],
 })
