@@ -199,7 +199,7 @@ a {
   }
   
   .sidebar .logo {
-    padding: 15px 0;
+    padding: 25px 0;
     margin: 0;
     display: block;
     position: relative;
@@ -207,23 +207,17 @@ a {
   }
   
   .sidebar .logo-img {
-    width: 35px;
-    display: block;
-    max-height: 30px;
-    margin-left: 13px;
-    margin-right: 15px;
+    text-align: center;
   }
   
   .sidebar .logo-img img {
-    width: 40px;
-    bottom: 15px;
-    position: absolute;
+    width: 65px;
+    padding-bottom: 5px;
   }
   
   .sidebar .logo .simple-text {
     text-transform: uppercase;
-    padding: 5px 0;
-    font-size: 18px;
+    font-size: 20px;
     color: #3c4858;
     white-space: nowrap;
     font-weight: 400;
@@ -241,6 +235,13 @@ a {
     height: 1px;
     width: calc(100% - 30px);
     background-color: rgba(180, 180, 180, 0.3);
+  }
+
+  .sidebar .logo-wrapper {
+    position: relative;
+    height: 135px;
+    width: 260px;
+    z-index: 4;
   }
   
   .sidebar,

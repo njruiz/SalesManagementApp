@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
 @NgModule({
-  declarations: [DashboardComponent, OrdersComponent],
+  declarations: [],
   imports: [CommonModule, RouterModule.forChild(AdminLayoutRoutes)],
 })
 export class AdminLayoutModule {}

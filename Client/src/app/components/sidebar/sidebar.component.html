@@ -1,11 +1,16 @@
-<div class="logo">
-  <a href="#" class="simple-text">
-    <div class="logo-img">
-      <img title="Treattle-Logo" src="/assets/img/Treattle-Logo.png" />
-    </div>
-    TREATTLE PH
-  </a>
+<div class="logo-wrapper">
+  <div class="logo">
+    <a href="#">
+      <div class="logo-img">
+        <img title="Treattle-Logo" src="/assets/img/Treattle-Logo.png" />
+      </div>
+      <div class="simple-text">
+        <p class="m-0">TREATTLE PH</p>
+      </div>
+    </a>
+  </div>
 </div>
+
 <div class="sidebar-wrapper">
   <!-- <div *ngIf="isMobileMenu()">
     <form class="navbar-form">
@@ -55,7 +60,7 @@
     </ul>
   </div> -->
   <ul class="nav">
-    <li
+    <!-- <li
       routerLinkActive="active"
       *ngFor="let menuItem of menuItems"
       class="{{ menuItem.class }} nav-item"
@@ -64,18 +69,51 @@
         <i class="material-icons">{{ menuItem.icon }}</i>
         <p>{{ menuItem.title }}</p>
       </a>
-    </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
-        
-        Dashboard
+      export const ROUTES: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: '/orders', title: 'Orders', icon: 'receipt_long', class: '' },
+  { path: '/products', title: 'Products', icon: 'shopping_bag', class: '' },
+  { path: '/inventory', title: 'Inventory', icon: 'inventory_2', class: '' },
+  { path: '/reports', title: 'Reports', icon: 'analytics', class: '' },
+  { path: '/settings', title: 'Settings', icon: 'settings', class: '' },
+];
+    </li> -->
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/dashboard">
+        <i class="material-icons">dashboard</i>
+        <p>Dashboard</p>
       </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" routerLink="/transactions" routerLinkActive="active" >
-          
-          Transactions
-        </a>
-      </li> -->
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/orders">
+        <i class="material-icons">receipt_long</i>
+        <p>Orders</p>
+      </a>
+    </li>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/products">
+        <i class="material-icons">shopping_bag</i>
+        <p>Products</p>
+      </a>
+    </li>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/inventory">
+        <i class="material-icons">inventory_2</i>
+        <p>Inventory</p>
+      </a>
+    </li>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/reports">
+        <i class="material-icons">analytics</i>
+        <p>Reports</p>
+      </a>
+    </li>
+    <mat-divider style="margin: 10px 15px"></mat-divider>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/settings">
+        <i class="material-icons">settings</i>
+        <p>Settings</p>
+      </a>
+    </li>
   </ul>
 </div>

@@ -11,7 +11,6 @@ import { ComponentsModule } from './components/components.module';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { NavComponent } from './nav/nav.component';
     SigninComponent,
     RegisterComponent,
     AdminLayoutComponent,
-    NavComponent,
   ],
   imports: [
     BrowserModule,
