@@ -1,0 +1,37 @@
+<div class="header my-4 d-flex justify-content-between">
+  <div *ngIf="dashboardMode; else notDashboardScreen" class="header-message">
+    <div class="header-mainMessage">
+      <div>Welcome back, {{ firstName }}</div>
+    </div>
+    <div class="header-subMessage pt-3">
+      <div>{{ dashboard_subMessage }}</div>
+    </div>
+  </div>
+  <div class="header-rightMenu float-right">
+    <a class="notification-dropdown text-dark pe-5" routerLink="/dashboard">
+      <i class="material-icons h3">notifications_none</i>
+    </a>
+    <img alt="{{ firstName }}" src="/assets/img/NJ-2.jpg" />
+    <a
+      class="ps-2 dropdown-toggle text-dark text-decoration-none"
+      dropdownToggle
+      >{{ firstName + " " + lastName }}
+    </a>
+    <div class="dropdown-menu mt-2" *dropdownMenu>
+      <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()">Logout</a>
+    </div>
+  </div>
+
+  <ng-template #notDashboardScreen>
+    <div class="header-message">
+      <div class="header-mainMessage">
+        <div>{{ screen_name }}</div>
+      </div>
+      <div class="header-subMessage pt-3">
+        <div>&nbsp;</div>
+      </div>
+    </div>
+  </ng-template>
+</div>
