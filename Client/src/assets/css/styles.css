@@ -156,6 +156,10 @@ body {
   padding: 0.8375em 0;
 }
 
+.mat-divider {
+  border-top-color: #8c8c8d;
+}
+
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: transparent !important;
 }
@@ -171,7 +175,7 @@ body {
   left: 0;
   z-index: 2;
   width: 260px;
-  background: #fff;
+  background: #202123;
 }
 
 .sidebar .caret {
@@ -189,8 +193,9 @@ body {
 .sidebar .nav li:hover > a,
 .sidebar .nav li .dropdown-menu a:hover,
 .sidebar .nav li .dropdown-menu a:focus {
-  background-color: rgba(200, 200, 200, 0.2);
-  color: #3c4858;
+  background: #2d2d2e;
+  transition: 0.3s ease;
+  color: #fff;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -198,7 +203,7 @@ body {
 .sidebar .nav li.active > a,
 .sidebar .nav li.active > a:hover,
 .sidebar .nav li.active > a i {
-  background-color: #00a944;
+  background-color: #2d2d2e;
   color: #fff;
 }
 
@@ -212,7 +217,7 @@ body {
 }
 
 .sidebar .logo {
-  padding: 25px 0;
+  padding: 20px 0;
   margin: 0;
   display: block;
   position: relative;
@@ -224,16 +229,19 @@ body {
 }
 
 .sidebar .logo-img img {
-  width: 65px;
+  width: 75px;
   padding-bottom: 5px;
+  border-radius: 50%;
+  border: 0;
 }
 
 .sidebar .logo .simple-text {
   text-transform: uppercase;
   font-size: 20px;
-  color: #3c4858;
+  font-family: 'Montserrat', 'sans-serif';
+  color: #ffffff;
   white-space: nowrap;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 30px;
   overflow: hidden;
   text-align: center;
@@ -291,14 +299,13 @@ body {
   line-height: 30px;
   width: 30px;
   text-align: center;
-  color: #a9afbb;
 }
 
 .sidebar .nav li .dropdown-menu a,
 .sidebar .nav li a {
   margin: 10px 15px 0;
   border-radius: 3px;
-  color: #3c4858;
+  color: #8c8c8d;
   text-transform: capitalize;
   font-size: 13px;
   padding: 10px 15px;
