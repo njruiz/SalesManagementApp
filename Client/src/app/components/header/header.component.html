@@ -8,20 +8,21 @@
     </div>
   </div>
   <div class="header-rightMenu float-right">
-    <a class="notification-dropdown text-dark pe-5" routerLink="/dashboard">
-      <i class="material-icons h3">notifications_none</i>
-    </a>
-    <img alt="{{ firstName }}" src="/assets/img/NJ-2.jpg" />
-    <a
-      class="ps-2 dropdown-toggle text-dark text-decoration-none"
-      dropdownToggle
-      >{{ firstName + " " + lastName }}
-    </a>
-    <div class="dropdown-menu mt-2" *dropdownMenu>
-      <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" (click)="logout()">Logout</a>
-    </div>
+    <ul class="header-nav">
+      <li class="nav-item dropdown">
+        <img alt="{{ firstName }}" src="/assets/img/NJ-2.jpg" />
+        <a
+          class="ps-2 dropdown-toggle text-dark text-decoration-none"
+          dropdownToggle
+          >{{ firstName + " " + lastName }}
+        </a>
+        <div class="dropdown-menu mt-2" *dropdownMenu>
+          <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <ng-template #notDashboardScreen>

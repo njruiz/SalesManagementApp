@@ -2,7 +2,66 @@
   <div class="header-wrapper py-3 px-5">
     <app-header screen_name="Products"></app-header>
   </div>
-  <div class="dashboard-wrapper">
-    <p>Products works</p>
+  <div class="products-wrapper py-4 px-5">
+    <div class="card">
+      <!-- <div class="card-header card-header-danger">
+        <h1 class="card-title">Product List</h1>
+      </div> -->
+      <div class="card-body">
+        <div class="table-header d-flex justify-content-between">
+          <div class="table-control">
+            <button mat-fab extended color="primary">
+              <mat-icon>add</mat-icon>
+              Add Product
+            </button>
+          </div>
+          <div class="search-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Search</mat-label>
+              <input matInput />
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table matSort class="table" (matSortChange)="sortData($event)">
+            <thead class="text-primary">
+              <th mat-sort-header="name">Name</th>
+              <th mat-sort-header="category">Category</th>
+              <th mat-sort-header="status">Status</th>
+              <th mat-sort-header="stocks">Stocks</th>
+              <th mat-sort-header="price">Price</th>
+              <th mat-sort-header="id">ID</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of sortedData">
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td [ngStyle]="{ color: setStatusFontColor(product.status) }">
+                  {{ product.status }}
+                </td>
+                <td>{{ product.stocks }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.id }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-footer">
+          <mat-paginator
+            #paginator
+            [length]="50"
+            [pageSize]="10"
+            [disabled]="false"
+            [showFirstLastButtons]="true"
+            [pageSizeOptions]="[5, 10, 15]"
+            [hidePageSize]="false"
+            [pageIndex]="0"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
