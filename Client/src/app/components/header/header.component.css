@@ -6,10 +6,14 @@
   border: 0;
 }
 
+.header .material-icons {
+  font-size: x-large;
+}
+
 .notification-dropdown .h3 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .notification-dropdown {
-    vertical-align: middle;
+  vertical-align: middle;
 }

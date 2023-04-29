@@ -70,9 +70,80 @@ body {
   z-index: -1;
 }
 
-.header-rightMenu {
-  font-size: medium ;
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border: 0;
+  margin-bottom: 30px;
+  border-radius: 35px;
+  color: #333333;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.card .card-body {
+  padding: 0.9375rem 20px;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 1px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card-header {
+  border-radius: 3px;
+  margin: 0px 15px 0;
+  margin-top: -20px;
+  padding: 15px;
+  position: relative;
+  z-index: 3 !important;
+  background: linear-gradient(60deg, #232425, #202123);
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(0, 0, 0, 0.14);
+}
+
+.card-title {
+  margin-top: 0;
+  margin-bottom: 3px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.container-light {
+  height: 80vh;
+  width: auto;
+  background: #ffffff;
+  border-radius: 30px;
+}
+
+.header .notification {
   align-self: center;
+}
+
+.header .notification-count {
+  position: absolute;
+  top: -5px;
+  border: 1px solid #fff;
+  right: 10px;
+  font-size: 9px;
+  background: #f44336;
+  color: #ffffff;
+  min-width: 20px;
+  padding: 0px 5px;
+  height: 20px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 19px;
+  display: block;
+}
+
+.header-rightMenu {
+  font-size: medium;
+  display: flex;
+  align-items: center;
 }
 
 .header-mainMessage {
@@ -81,7 +152,7 @@ body {
 }
 
 .header-subMessage {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: medium;
   color: #8c8c8d;
 }
@@ -90,16 +161,10 @@ body {
   height: 145px;
   width: auto;
   background: #fff;
-  
 }
 
 .main-wrapper {
   height: 100%;
-}
-
-.positronx {
-  text-decoration: none;
-  color: #ffffff;
 }
 
 .main-panel {
@@ -167,6 +232,32 @@ body {
 .nav .nav-item {
   position: relative;
 }
+
+.header-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: row;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.positronx {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.products-wrapper {
+  height: 80%;
+}
+
+/* .search-container .mat-mdc-text-field-wrapper {
+  border-radius: 24px;
+} */
 
 .sidebar {
   position: fixed;
@@ -238,7 +329,7 @@ body {
 .sidebar .logo .simple-text {
   text-transform: uppercase;
   font-size: 20px;
-  font-family: 'Montserrat', 'sans-serif';
+  font-family: "Montserrat", "sans-serif";
   color: #ffffff;
   white-space: nowrap;
   font-weight: 500;
@@ -309,6 +400,36 @@ body {
   text-transform: capitalize;
   font-size: 13px;
   padding: 10px 15px;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table thead th {
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-top-width: 0;
+  border-bottom-width: 1px;
+  vertical-align: bottom;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+  border-top: 2px solid rgba(0, 0, 0, 0.06);
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  vertical-align: middle;
+}
+
+.table-header {
+  padding-bottom: 1.5rem;
+  padding-top: 1rem;
 }
 
 .wrapper {
