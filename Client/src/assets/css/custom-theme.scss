@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define your custom theme
+$primary-black: mat.define-palette(mat.$grey-palette, 900);
+$accent-white: mat.define-palette(mat.$grey-palette, A100, A200, A400);
+$warn-red: mat.define-palette(mat.$red-palette);
+
+$custom-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary-black,
+      accent: $accent-white,
+      warn: $warn-red
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Apply the custom theme as the default theme for the application
+@include mat.all-component-themes($custom-theme);
