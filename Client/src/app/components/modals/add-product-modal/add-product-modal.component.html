@@ -65,15 +65,7 @@
         </div>
 
         <mat-dialog-actions class="justify-content-end p-0">
-          <div class="button-container">
-            <button
-              mat-raised-button
-              color="primary-black"
-              type="submit"
-              [disabled]="productForm.invalid"
-            >
-              Add Product
-            </button>
+          <div class="button-container">            
             <button
               mat-raised-button
               color="warn"
@@ -81,6 +73,14 @@
               (click)="onCancel()"
             >
               Cancel
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="productForm.invalid"
+            >
+              Add Product
             </button>
           </div>
         </mat-dialog-actions>

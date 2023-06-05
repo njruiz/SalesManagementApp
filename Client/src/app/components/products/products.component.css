@@ -7,9 +7,9 @@
   font-size: 14px;
 }
 
-.mat-mdc-fab.mat-primary {
+/* .mat-mdc-fab.mat-primary {
   --mdc-fab-container-color: #202123;
-}
+} */
 
 input.mat-input-element {
   color: red;

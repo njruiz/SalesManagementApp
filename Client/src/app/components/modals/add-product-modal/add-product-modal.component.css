@@ -1,7 +1,6 @@
-.mat-card {
+mat-card {
   width: 400px;
   margin: 0 auto;
-  padding: 30px;
   text-align: center;
   box-sizing: border-box;
 }

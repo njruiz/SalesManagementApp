@@ -58,23 +58,7 @@ export class ProductsComponent {
       stocks: 15,
       price: 135,
       id: '202305',
-    },
-    {
-      name: 'Cheesecake Cone Bites',
-      category: 'Cone Bites',
-      status: 'Sold Out',
-      stocks: 0,
-      price: 135,
-      id: '202306',
-    },
-    {
-      name: 'Milky Almonds Cone Bites',
-      category: 'Cone Bites',
-      status: 'Available',
-      stocks: 15,
-      price: 135,
-      id: '202307',
-    },
+    }
   ];
 
   sortedData: Products[];
