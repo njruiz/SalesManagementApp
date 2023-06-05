@@ -10,17 +10,15 @@
       <div class="card-body">
         <div class="table-header d-flex justify-content-between">
           <div class="table-control">
-            <button mat-fab extended color="primary">
+            <button
+              mat-fab
+              extended
+              color="primary"
+              (click)="openProductFormDialog()"
+            >
               <mat-icon>add</mat-icon>
               Add Product
             </button>
-          </div>
-          <div class="search-container">
-            <mat-form-field appearance="fill">
-              <mat-label>Search</mat-label>
-              <input matInput />
-              <mat-icon matPrefix>search</mat-icon>
-            </mat-form-field>
           </div>
         </div>
         <div class="table-responsive">

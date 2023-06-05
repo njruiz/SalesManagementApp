@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Sort } from '@angular/material/sort';
+import { AddProductModalComponent } from '../modals/add-product-modal/add-product-modal.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 export interface Products {
   name: string;
@@ -56,29 +58,29 @@ export class ProductsComponent {
       stocks: 15,
       price: 135,
       id: '202305',
-    },
-    {
-      name: 'Cheesecake Cone Bites',
-      category: 'Cone Bites',
-      status: 'Sold Out',
-      stocks: 0,
-      price: 135,
-      id: '202306',
-    },
-    {
-      name: 'Milky Almonds Cone Bites',
-      category: 'Cone Bites',
-      status: 'Available',
-      stocks: 15,
-      price: 135,
-      id: '202307',
-    },
+    }
   ];
 
   sortedData: Products[];
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.sortedData = this.products.slice();
+  }
+
+  addNewProduct(): void {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '450px';
+
+    this.dialog.open(AddProductModalComponent, dialogConfig);
+  }
+
+  openProductFormDialog(): void {
+    this.dialog.open(AddProductModalComponent, {
+      width: '400px'
+    });
   }
 
   setStatusFontColor(status: string) {

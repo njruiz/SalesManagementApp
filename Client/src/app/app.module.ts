@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { AngularMaterialModule } from './angular-material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
@@ -26,8 +25,6 @@ import { AppRoutingModule } from './app.routing';
     HttpClientModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
     ComponentsModule,
   ],
   providers: [],

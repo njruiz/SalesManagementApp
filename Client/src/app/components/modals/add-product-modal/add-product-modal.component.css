@@ -1,0 +1,48 @@
+mat-card {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+mat-card-title {
+  font-size: 20px;
+  margin: 20px;
+}
+
+mat-form-field {
+  background: white;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.mat-mdc-form-field {
+  display: flex;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
+}
+
+.mat-mdc-card-content {
+  width: 100%;
+}
