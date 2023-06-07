@@ -229,6 +229,10 @@ body {
   background-color: transparent !important;
 }
 
+.mat-sort-header-container {
+  justify-content: center !important;
+}
+
 .nav .nav-item {
   position: relative;
 }
