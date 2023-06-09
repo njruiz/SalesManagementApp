@@ -7,9 +7,10 @@
   font-size: 14px;
 }
 
-/* .mat-mdc-fab.mat-primary {
-  --mdc-fab-container-color: #202123;
-} */
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+  text-align: center;
+}
 
 input.mat-input-element {
   color: red;

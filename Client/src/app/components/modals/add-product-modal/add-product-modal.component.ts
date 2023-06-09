@@ -23,7 +23,6 @@ export class AddProductModalComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productName: ['', Validators.required],
       category: ['', Validators.required],
-      stocks: ['', Validators.required],
       price: ['', Validators.required],
     });
 
