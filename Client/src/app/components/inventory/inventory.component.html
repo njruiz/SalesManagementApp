@@ -2,7 +2,144 @@
   <div class="header-wrapper py-3 px-5">
     <app-header screen_name="Inventory"></app-header>
   </div>
-  <div class="dashboard-wrapper">
-    <p>Inventory works</p>
+
+  <div class="inventory-wrapper py-4 px-5">
+    <!-- Product columns -->
+    <div class="card" id="card_products">
+      <div class="card-body">
+        <div class="table-header d-flex justify-content-between">
+          <div class="table-control">
+            <button mat-fab extended color="primary">
+              <mat-icon>add</mat-icon>
+              Add Product
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table mat-table [dataSource]="sortedProductData" matSort (matSortChange)="sortProducts($event)">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="category">Category</th>
+              <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="size">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="size">Size</th>
+              <td mat-cell *matCellDef="let element">{{ element.size }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
+              <td mat-cell *matCellDef="let element" [ngStyle]="{ color: setStatusFontColor(element.status) }">{{
+                element.status }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="stocks">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="stocks">Stocks</th>
+              <td mat-cell *matCellDef="let element">{{ element.stocks }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="price">Price</th>
+              <td mat-cell *matCellDef="let element">{{ element.price | number:'1.2-2' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="edit(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="delete(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedProductColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedProductColumns;"></tr>
+          </table>
+        </div>
+        <div class="table-footer">
+          <mat-paginator #paginator [length]="50" [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+            [pageSizeOptions]="[5, 10, 15]" [hidePageSize]="false" [pageIndex]="0" aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resource columns -->
+    <div class="card" id="card_resources">
+      <div class="card-body">
+        <div class="table-header d-flex justify-content-between">
+          <div class="table-control">
+            <button mat-fab extended color="primary">
+              <mat-icon>add</mat-icon>
+              Add Resource
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table mat-table [dataSource]="sortedResourceData" matSort (matSortChange)="sortResources($event)">
+            <!-- Displaying columns -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Item Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="brand">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="brand">Brand Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
+              <td mat-cell *matCellDef="let element" [ngStyle]="{ color: setStatusFontColor(element.status) }">{{
+                element.status }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="size">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Size</th>
+              <td mat-cell *matCellDef="let element" [ngStyle]="{ color: setStatusFontColor(element.size) }">{{
+                element.size }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="quantity">Quantity</th>
+              <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="price">Price</th>
+              <td mat-cell *matCellDef="let element">{{ element.price | number:'1.2-2' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="edit(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="delete(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedResourceColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedResourceColumns;"></tr>
+          </table>
+        </div>
+        <div class="table-footer">
+          <mat-paginator #paginator [length]="50" [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+            [pageSizeOptions]="[5, 10, 15]" [hidePageSize]="false" [pageIndex]="0" aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -3,13 +3,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { AddProductModalComponent } from '../modals/add-product-modal/add-product-modal.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface Products {
-  name: string;
-  category: string;
-  price: number;
-  id: string;
-}
+import { Product } from 'src/app/_models/product';
 
 @Component({
   selector: 'app-products',
@@ -17,42 +11,10 @@ export interface Products {
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
-  displayedColumns = ['id', 'name', 'category', 'price', 'actions'];
-  dataSource: MatTableDataSource<Products>;
-  products: Products[] = [
-    {
-      name: 'Dark Chocolate IceCream Cake',
-      category: 'IceCream Cake',
-      price: 135,
-      id: '202301',
-    },
-    {
-      name: 'Coffee IceCream Cake',
-      category: 'IceCream Cake',
-      price: 135,
-      id: '202302',
-    },
-    {
-      name: 'Ube Keso IceCream Cake',
-      category: 'IceCream Cake',
-      price: 135,
-      id: '202303',
-    },
-    {
-      name: 'Strawberry Choco Cone Bites',
-      category: 'Cone Bites',
-      price: 135,
-      id: '202304',
-    },
-    {
-      name: 'Red Velvet Cone Bites',
-      category: 'Cone Bites',
-      price: 135,
-      id: '202305',
-    }
-  ];
+  displayedColumns = ['id', 'name', 'category', 'size', 'price', 'actions'];
+  dataSource: MatTableDataSource<Product>;
 
-  sortedData: Products[];
+  sortedData: Product[];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -61,31 +23,36 @@ export class ProductsComponent {
       id: '202301',
       name: 'Dark Chocolate IceCream Cake',
       category: 'IceCream Cake',
-      price: 1335.00,
+      size: 'Regular',
+      price: 135,
     },
     {
       id: '202302',
       name: 'Coffee IceCream Cake',
       category: 'IceCream Cake',
-      price: 135.00,
+      size: 'Large',
+      price: 325,
     },
     {
       id: '202303',
       name: 'Ube Keso IceCream Cake',
       category: 'IceCream Cake',
-      price: 135.00,
+      size: 'Large',
+      price: 325,
     },
     {
       id: '202304',
       name: 'Strawberry Choco Cone Bites',
       category: 'Cone Bites',
-      price: 135.00,
+      size: 'Regular',
+      price: 120,
     },
     {
       id: '202305',
       name: 'Red Velvet Cone Bites',
       category: 'Cone Bites',
-      price: 135.00,
+      size: 'Regular',
+      price: 120,
     }]);
 
     this.sortedData = this.dataSource.data.slice();
@@ -134,6 +101,8 @@ export class ProductsComponent {
           return compare(a.name, b.name, isAsc);
         case "category":
           return compare(a.category, b.category, isAsc);
+        case "size":
+          return compare(a.size, b.size, isAsc);
         case "price":
           return compare(a.price, b.price, isAsc);
         default:
