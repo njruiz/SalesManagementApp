@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { InventoryItem } from 'src/app/_models/inventoryItem';
 
 @Component({
   selector: 'app-inventory',
@@ -6,7 +10,167 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inventory.component.css'],
 })
 export class InventoryComponent implements OnInit {
-  constructor() {}
+  displayedProductColumns = ['name', 'category', 'status', 'stocks', 'price', 'actions'];
+  displayedResourceColumns = ['name', 'status', 'quantity', 'price', 'actions'];
 
-  ngOnInit(): void {}
+  dataSource_Product: MatTableDataSource<InventoryItem>;  
+  dataSource_Resource: MatTableDataSource<InventoryItem>;  
+
+  sortedProductData: InventoryItem[];
+  sortedResourceData: InventoryItem[];
+
+  constructor(public dialog: MatDialog) {
+    this.dataSource_Product = new MatTableDataSource([
+      {
+        name: 'Dark Chocolate',
+        category: 'IceCream Cake',
+        status: 'Available',
+        stocks: 31,
+        price: 135,
+        id: '202301',
+      },
+      {
+        name: 'Coffee',
+        category: 'IceCream Cake',
+        status: 'Low Stocks',
+        stocks: 5,
+        price: 135,
+        id: '202302',
+      },
+      {
+        name: 'Ube Keso',
+        category: 'IceCream Cake',
+        status: 'Sold Out',
+        stocks: 0,
+        price: 135,
+        id: '202303',
+      },
+      {
+        name: 'Strawberry Choco',
+        category: 'Cone Bites',
+        status: 'Available',
+        stocks: 123,
+        price: 135,
+        id: '202304',
+      },
+      {
+        name: 'Red Velvet',
+        category: 'Cone Bites',
+        status: 'Available',
+        stocks: 15,
+        price: 135,
+        id: '202305',
+      }
+    ]);
+
+    this.dataSource_Resource = new MatTableDataSource([
+      {
+        name: 'Big Tin Can',
+        status: 'Available',
+        quantity: 120,
+        price: 54,
+        id: 'R-20230601',
+      },
+      {
+        name: 'Small Tin Can',
+        status: 'Available',
+        quantity: 95,
+        price: 45,
+        id: 'R-20230602',
+      },
+      {
+        name: 'Angel\'s Condesed Milk - 325 mL',
+        status: 'Available',
+        quantity: 12,
+        price: 45,
+        id: 'R-20230603',
+      },
+      {
+        name: 'All Pupose Cream - 1 L',
+        status: 'Available',
+        quantity: 4,
+        price: 298,
+        id: 'R-20230604',
+      },
+      {
+        name: 'Chocolate Bar - 1 Kg',
+        status: 'Available',
+        quantity: 9,
+        price: 275,
+        id: 'R-20230605',
+      }
+    ]);  
+
+    this.sortedProductData = this.dataSource_Product.data.slice();
+    this.sortedResourceData = this.dataSource_Resource.data.slice();
+  }
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  setStatusFontColor(status: string) {
+    switch (status) {
+      case 'Available':
+        return 'RGB(8, 148, 4)';
+      case 'Low Stocks':
+        return 'RGB(255, 191, 0)';
+      case 'Sold Out':
+        return 'red';
+    }
+  }
+
+  sortProducts(sort: Sort) {
+    const data = this.dataSource_Product.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedProductData = data;
+      return;
+    }
+
+    this.sortedProductData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'category':
+          return compare(a.category, b.category, isAsc);
+        case 'status':
+          return compare(a.status, b.status, isAsc);
+        case 'stocks':
+          return compare(a.stocks, b.stocks, isAsc);
+        case 'price':
+          return compare(a.price, b.price, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+
+  sortResources(sort: Sort) {
+    const data = this.dataSource_Resource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedResourceData = data;
+      return;
+    }
+
+    this.sortedResourceData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'status':
+          return compare(a.status, b.status, isAsc);
+        case 'quantity':
+          return compare(a.quantity, b.quantity, isAsc);
+        case 'price':
+          return compare(a.price, b.price, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

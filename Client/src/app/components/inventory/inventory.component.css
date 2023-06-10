@@ -1,0 +1,38 @@
+.card {
+    width: 50%;
+}
+
+#card_products {
+    margin-right: 10px;
+}
+
+#card_resources {
+    margin-left: 10px;
+}
+
+.mat-mdc-extended-fab {
+    height: 40px;
+  }
+  
+  .mat-mdc-form-field,
+  .mat-mdc-floating-label {
+    font-size: 14px;
+  }
+  
+  .mdc-data-table__cell,
+  .mdc-data-table__header-cell {
+    text-align: center;
+  }
+  
+  input.mat-input-element {
+    color: red;
+  }
+  
+  .table .text-primary {
+    color: #212529 !important;
+  }
+  
+  .mat-form-field-underline {
+    display: none;
+  }
+  

@@ -12,6 +12,8 @@ import { startWith, map } from 'rxjs/operators';
 export class AddProductModalComponent implements OnInit {
   productForm: FormGroup;
   options: string[] = ['Option 1', 'Option 2', 'Option 3'];
+  sizes: string[] = ['Regular', 'Medium', 'Large'];
+
   filteredOptions: Observable<string[]>;
 
   constructor(
@@ -23,6 +25,7 @@ export class AddProductModalComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productName: ['', Validators.required],
       category: ['', Validators.required],
+      size: ['', Validators.required],
       price: ['', Validators.required],
     });
 
