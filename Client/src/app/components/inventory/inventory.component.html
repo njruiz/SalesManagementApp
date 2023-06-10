@@ -2,27 +2,21 @@
   <div class="header-wrapper py-3 px-5">
     <app-header screen_name="Inventory"></app-header>
   </div>
-  <div class="inventory-wrapper d-flex py-4 px-5">
-    <div class="card" id = "card_products">
-      <!-- <div class="card-header card-header-danger">
-        <h1 class="card-title">Product List</h1>
-      </div> -->
+
+  <div class="inventory-wrapper py-4 px-5">
+    <!-- Product columns -->
+    <div class="card" id="card_products">
       <div class="card-body">
         <div class="table-header d-flex justify-content-between">
           <div class="table-control">
-            <button
-              mat-fab
-              extended
-              color="primary"
-            >
+            <button mat-fab extended color="primary">
               <mat-icon>add</mat-icon>
               Add Product
             </button>
           </div>
         </div>
-        <div class="table-responsive">          
+        <div class="table-responsive">
           <table mat-table [dataSource]="sortedProductData" matSort (matSortChange)="sortProducts($event)">
-            <!-- Displaying columns -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Name</th>
               <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -33,9 +27,15 @@
               <td mat-cell *matCellDef="let element">{{ element.category }}</td>
             </ng-container>
 
+            <ng-container matColumnDef="size">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="size">Size</th>
+              <td mat-cell *matCellDef="let element">{{ element.size }}</td>
+            </ng-container>
+
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
-              <td mat-cell *matCellDef="let element"   [ngStyle]="{ color: setStatusFontColor(element.status) }">{{ element.status }}</td>
+              <td mat-cell *matCellDef="let element" [ngStyle]="{ color: setStatusFontColor(element.status) }">{{
+                element.status }}</td>
             </ng-container>
 
             <ng-container matColumnDef="stocks">
@@ -47,7 +47,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header="price">Price</th>
               <td mat-cell *matCellDef="let element">{{ element.price | number:'1.2-2' }}</td>
             </ng-container>
-          
+
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let element">
@@ -59,56 +59,53 @@
                 </button>
               </td>
             </ng-container>
-          
+
             <tr mat-header-row *matHeaderRowDef="displayedProductColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedProductColumns;"></tr>          
+            <tr mat-row *matRowDef="let row; columns: displayedProductColumns;"></tr>
           </table>
         </div>
         <div class="table-footer">
-          <mat-paginator
-            #paginator
-            [length]="50"
-            [pageSize]="5"
-            [disabled]="false"
-            [showFirstLastButtons]="true"
-            [pageSizeOptions]="[5, 10, 15]"
-            [hidePageSize]="false"
-            [pageIndex]="0"
-            aria-label="Select page"
-          >
+          <mat-paginator #paginator [length]="50" [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+            [pageSizeOptions]="[5, 10, 15]" [hidePageSize]="false" [pageIndex]="0" aria-label="Select page">
           </mat-paginator>
         </div>
       </div>
     </div>
 
-    <div class="card" id = "card_resources">
-      <!-- <div class="card-header card-header-danger">
-        <h1 class="card-title">Product List</h1>
-      </div> -->
+    <!-- Resource columns -->
+    <div class="card" id="card_resources">
       <div class="card-body">
         <div class="table-header d-flex justify-content-between">
           <div class="table-control">
-            <button
-              mat-fab
-              extended
-              color="primary"
-            >
+            <button mat-fab extended color="primary">
               <mat-icon>add</mat-icon>
               Add Resource
             </button>
           </div>
         </div>
-        <div class="table-responsive">          
+        <div class="table-responsive">
           <table mat-table [dataSource]="sortedResourceData" matSort (matSortChange)="sortResources($event)">
             <!-- Displaying columns -->
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Name</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Item Name</th>
               <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="brand">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="brand">Brand Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
             </ng-container>
 
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
-              <td mat-cell *matCellDef="let element"   [ngStyle]="{ color: setStatusFontColor(element.status) }">{{ element.status }}</td>
+              <td mat-cell *matCellDef="let element" [ngStyle]="{ color: setStatusFontColor(element.status) }">{{
+                element.status }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="size">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Size</th>
+              <td mat-cell *matCellDef="let element" [ngStyle]="{ color: setStatusFontColor(element.size) }">{{
+                element.size }}</td>
             </ng-container>
 
             <ng-container matColumnDef="quantity">
@@ -120,7 +117,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header="price">Price</th>
               <td mat-cell *matCellDef="let element">{{ element.price | number:'1.2-2' }}</td>
             </ng-container>
-          
+
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let element">
@@ -132,23 +129,14 @@
                 </button>
               </td>
             </ng-container>
-          
+
             <tr mat-header-row *matHeaderRowDef="displayedResourceColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedResourceColumns;"></tr>          
+            <tr mat-row *matRowDef="let row; columns: displayedResourceColumns;"></tr>
           </table>
         </div>
         <div class="table-footer">
-          <mat-paginator
-            #paginator
-            [length]="50"
-            [pageSize]="5"
-            [disabled]="false"
-            [showFirstLastButtons]="true"
-            [pageSizeOptions]="[5, 10, 15]"
-            [hidePageSize]="false"
-            [pageIndex]="0"
-            aria-label="Select page"
-          >
+          <mat-paginator #paginator [length]="50" [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+            [pageSizeOptions]="[5, 10, 15]" [hidePageSize]="false" [pageIndex]="0" aria-label="Select page">
           </mat-paginator>
         </div>
       </div>

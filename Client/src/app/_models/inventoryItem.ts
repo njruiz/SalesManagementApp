@@ -1,9 +1,8 @@
-export interface InventoryItem {
-    id: string;
-    name: string;
-    category?: string;
+import { Product } from "./product";
+
+export interface InventoryItem extends Product {   
     status: string;
     stocks?: number;
     quantity?: number;
-    price: number;
+    brand?: string;
 }

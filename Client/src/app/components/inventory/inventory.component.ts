@@ -10,8 +10,8 @@ import { InventoryItem } from 'src/app/_models/inventoryItem';
   styleUrls: ['./inventory.component.css'],
 })
 export class InventoryComponent implements OnInit {
-  displayedProductColumns = ['name', 'category', 'status', 'stocks', 'price', 'actions'];
-  displayedResourceColumns = ['name', 'status', 'quantity', 'price', 'actions'];
+  displayedProductColumns = ['name', 'category', 'size', 'status', 'stocks', 'price', 'actions'];
+  displayedResourceColumns = ['name', 'brand', 'size', 'status', 'quantity', 'price', 'actions'];
 
   dataSource_Product: MatTableDataSource<InventoryItem>;  
   dataSource_Resource: MatTableDataSource<InventoryItem>;  
@@ -23,7 +23,8 @@ export class InventoryComponent implements OnInit {
     this.dataSource_Product = new MatTableDataSource([
       {
         name: 'Dark Chocolate',
-        category: 'IceCream Cake',
+        category: 'Ice Cream Cake',
+        size: 'Regular',
         status: 'Available',
         stocks: 31,
         price: 135,
@@ -31,7 +32,8 @@ export class InventoryComponent implements OnInit {
       },
       {
         name: 'Coffee',
-        category: 'IceCream Cake',
+        category: 'Ice Cream Cake',
+        size: 'Regular',
         status: 'Low Stocks',
         stocks: 5,
         price: 135,
@@ -39,15 +41,17 @@ export class InventoryComponent implements OnInit {
       },
       {
         name: 'Ube Keso',
-        category: 'IceCream Cake',
+        category: 'Ice Cream Cake',
+        size: 'Large',
         status: 'Sold Out',
         stocks: 0,
-        price: 135,
+        price: 325,
         id: '202303',
       },
       {
         name: 'Strawberry Choco',
         category: 'Cone Bites',
+        size: 'Regular',
         status: 'Available',
         stocks: 123,
         price: 135,
@@ -56,6 +60,7 @@ export class InventoryComponent implements OnInit {
       {
         name: 'Red Velvet',
         category: 'Cone Bites',
+        size: 'Regular',
         status: 'Available',
         stocks: 15,
         price: 135,
@@ -65,36 +70,46 @@ export class InventoryComponent implements OnInit {
 
     this.dataSource_Resource = new MatTableDataSource([
       {
-        name: 'Big Tin Can',
+        name: 'Tin Can',
+        brand: 'Ava\'s Baking Supplies',
         status: 'Available',
+        size: 'Large',
         quantity: 120,
         price: 54,
         id: 'R-20230601',
       },
       {
-        name: 'Small Tin Can',
+        name: 'Tin Can',
+        brand: 'Shopee',
         status: 'Available',
+        size: 'Regular',
         quantity: 95,
         price: 45,
         id: 'R-20230602',
       },
       {
-        name: 'Angel\'s Condesed Milk - 325 mL',
+        name: 'Condensed Milk',
+        brand: 'Angel\'s',
         status: 'Available',
+        size: '325 mL',
         quantity: 12,
         price: 45,
         id: 'R-20230603',
       },
       {
-        name: 'All Pupose Cream - 1 L',
+        name: 'All Pupose Cream',
+        brand: 'Nestle',
         status: 'Available',
+        size: '1 L',
         quantity: 4,
         price: 298,
         id: 'R-20230604',
       },
       {
-        name: 'Chocolate Bar - 1 Kg',
+        name: 'Chocolate Bar',
+        brand: 'Goya',
         status: 'Available',
+        size: '1 Kg',
         quantity: 9,
         price: 275,
         id: 'R-20230605',
