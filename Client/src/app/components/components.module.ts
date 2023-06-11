@@ -12,6 +12,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddInventoryProductModalComponent } from './modals/add-inventory-product-modal/add-inventory-product-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReportsComponent,
     SettingsComponent,
     AddProductModalComponent,
+    AddInventoryProductModalComponent,
   ],
   imports: [
     CommonModule,

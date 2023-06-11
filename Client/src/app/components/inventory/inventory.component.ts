@@ -3,13 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { InventoryItem } from 'src/app/_models/inventoryItem';
+import { AddInventoryProductModalComponent } from '../modals/add-inventory-product-modal/add-inventory-product-modal.component';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css'],
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent {
   displayedProductColumns = ['name', 'category', 'size', 'status', 'stocks', 'price', 'actions'];
   displayedResourceColumns = ['name', 'brand', 'size', 'status', 'quantity', 'price', 'actions'];
 
@@ -119,9 +120,11 @@ export class InventoryComponent implements OnInit {
     this.sortedProductData = this.dataSource_Product.data.slice();
     this.sortedResourceData = this.dataSource_Resource.data.slice();
   }
-  
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
+  openAddProductFormDialog(): void {
+    this.dialog.open(AddInventoryProductModalComponent, {
+      width: '400px'
+    });
   }
 
   setStatusFontColor(status: string) {
