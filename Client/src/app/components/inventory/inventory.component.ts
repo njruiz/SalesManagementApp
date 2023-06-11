@@ -4,6 +4,7 @@ import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { InventoryItem } from 'src/app/_models/inventoryItem';
 import { AddInventoryProductModalComponent } from '../modals/add-inventory-product-modal/add-inventory-product-modal.component';
+import { AddInventoryResourceModalComponent } from '../modals/add-inventory-resource-modal/add-inventory-resource-modal.component';
 
 @Component({
   selector: 'app-inventory',
@@ -123,6 +124,12 @@ export class InventoryComponent {
 
   openAddProductFormDialog(): void {
     this.dialog.open(AddInventoryProductModalComponent, {
+      width: '400px'
+    });
+  }
+
+  openAddResourceFormDialog(): void {
+    this.dialog.open(AddInventoryResourceModalComponent, {
       width: '400px'
     });
   }
