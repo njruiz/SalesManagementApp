@@ -79,9 +79,7 @@ export class AddInventoryProductModalComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-
-    // Here, you can perform the logic to add the new product
-    // For demonstration purposes, we will just log the form value
+    
     console.log(this.productForm.value);
 
     // Close the modal dialog
