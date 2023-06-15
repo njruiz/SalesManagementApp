@@ -23,3 +23,7 @@ input.mat-input-element {
 .mat-form-field-underline {
   display: none;
 }
+
+.material-icons {
+  font-size: 20px;
+}
