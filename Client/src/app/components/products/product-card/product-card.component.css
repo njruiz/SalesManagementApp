@@ -1,0 +1,40 @@
+input {
+    width: 2.2rem;
+    text-align: center;
+    appearance: textfield;
+}
+
+mat-icon {
+    margin: 0 !important;
+    font-size: 1.3rem !important;
+}
+
+.custom-card {
+    max-width: 230px;
+    max-height: 385px;
+}
+
+.custom-form-field {
+    width: 80%; /* Optional: Set the width as needed */
+  }
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.product-image {
+    /* or specify an image */
+    background-image: url("/assets/img/dark_choco_cake.jpg");
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

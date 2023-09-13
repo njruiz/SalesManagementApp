@@ -119,6 +119,12 @@ body {
   border-radius: 30px;
 }
 
+.custom-select .mat-select-panel .mat-option {
+  border: 1px solid #000000; /* Add your desired border styles here */
+  border-radius: 4px; /* Optional: Add border-radius for rounded corners */
+  padding: 8px; /* Optional: Add padding for spacing */
+}
+
 .header .notification {
   align-self: center;
 }
@@ -229,8 +235,16 @@ body {
   background-color: transparent !important;
 }
 
+.mat-horizontal-content-container {
+  padding: 1em 3em !important;
+}
+
 .mat-sort-header-container {
   justify-content: center !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
 }
 
 .nav .nav-item {

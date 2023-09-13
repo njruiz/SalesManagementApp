@@ -31,9 +31,11 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const materialModules = [
   CdkTreeModule,
@@ -68,12 +70,14 @@ const materialModules = [
   MatGridListModule,
   MatRadioModule,
   MatDatepickerModule,
+  MatNativeDateModule,
   MatTooltipModule,
   BrowserAnimationsModule,
+  MatStepperModule,
 ];
 
 @NgModule({
   imports: [CommonModule, ...materialModules],
   exports: [...materialModules],
 })
-export class AngularMaterialModule {}
+export class AngularMaterialModule { }

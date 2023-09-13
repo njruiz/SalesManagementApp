@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { AddProductModalComponent } from '../modals/add-product-modal/add-product-modal.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/_models/product';
 
@@ -56,16 +56,6 @@ export class ProductsComponent {
     }]);
 
     this.sortedData = this.dataSource.data.slice();
-  }
-
-  addNewProduct(): void {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '450px';
-
-    this.dialog.open(AddProductModalComponent, dialogConfig);
   }
 
   openProductFormDialog(): void {

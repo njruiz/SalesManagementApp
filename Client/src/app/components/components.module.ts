@@ -14,6 +14,8 @@ import { AddProductModalComponent } from './modals/add-product-modal/add-product
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInventoryProductModalComponent } from './modals/add-inventory-product-modal/add-inventory-product-modal.component';
 import { AddInventoryResourceModalComponent } from './modals/add-inventory-resource-modal/add-inventory-resource-modal.component';
+import { AddOrderModalComponent } from './modals/add-order-modal/add-order-modal.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { AddInventoryResourceModalComponent } from './modals/add-inventory-resou
     AddProductModalComponent,
     AddInventoryProductModalComponent,
     AddInventoryResourceModalComponent,
+    AddOrderModalComponent,
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 import { Product } from 'src/app/_models/product';
 
 @Component({
