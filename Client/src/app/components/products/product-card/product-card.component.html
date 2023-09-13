@@ -1,0 +1,34 @@
+<mat-card class="custom-card">
+    <mat-card-header class="align-self-center">
+        <img mat-card-lg-image class="product-image">
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>₱{{ product.price  | number : '1.2-2' }}</mat-card-subtitle>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="justify-content-center">
+        <mat-form-field class="custom-form-field">
+            <mat-label>Size</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let size of sizes" [value]="size">
+                {{size}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </mat-card-actions>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-icon-button (click)="decrementQuantity()">
+            <mat-icon>remove</mat-icon>
+        </button>
+        <input class="mx-1" matInput type="number" [(ngModel)]="quantity" min="0">
+        <button mat-icon-button (click)="incrementQuantity()">
+            <mat-icon>add</mat-icon>
+        </button>
+        <span class="spacer"></span>
+        <button mat-raised-button color="primary" (click)="addToCart()">
+            <mat-icon>shopping_cart_checkout</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -4,6 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/_models/order';
 import { Product } from 'src/app/_models/product';
+import { AddOrderModalComponent } from '../modals/add-order-modal/add-order-modal.component';
 
 @Component({
   selector: 'app-orders',
@@ -113,11 +114,12 @@ export class OrdersComponent {
     this.sortedData = this.dataSource.data.slice();
   }
 
-  // openOrderFormDialog(): void {
-  //   this.dialog.open(AddOrderModalComponent, {
-  //     width: '400px'
-  //   });
-  // }
+  openOrderFormDialog(): void {
+    this.dialog.open(AddOrderModalComponent, {
+      width: '85em',
+      height: '45em'
+    });
+  }
 
   setStatusFontColor(status: string) {
     switch (status) {

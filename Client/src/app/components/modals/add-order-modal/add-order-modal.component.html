@@ -1,0 +1,147 @@
+<mat-stepper class="order-stepper" [orientation]="(stepperOrientation | async)!">
+    <!-- Step 1: Order -->
+    <mat-step [stepControl]="orderForm" label="Select products">
+        <div class="step-container">
+            <mat-tab-group>
+                <mat-tab label="Ice Cream Cake">
+                    <div class="products-container justify-content-center">
+                        <div *ngFor="let product of products" class="text-center d-inline-flex px-2 py-2">
+                            <app-product-card [product]="product"></app-product-card>
+                        </div>
+                        <div class="products-footer">
+                            <mat-paginator class="center-paginator" #paginator [length]="products.length"
+                                [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+                                [hidePageSize]="true" [pageIndex]="0" aria-label="Select page">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Cone Bites">
+                    <div class="products-container justify-content-center">
+                        <div *ngFor="let product of products" class="text-center d-inline-flex px-2 py-2">
+                            <app-product-card [product]="product"></app-product-card>
+                        </div>
+                        <div class="products-footer">
+                            <mat-paginator class="center-paginator" #paginator [length]="products.length"
+                                [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+                                [hidePageSize]="true" [pageIndex]="0" aria-label="Select page">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Cookies">
+                    <div class="products-container justify-content-center">
+                        <div *ngFor="let product of products" class="text-center d-inline-flex px-2 py-2">
+                            <app-product-card [product]="product"></app-product-card>
+                        </div>
+                        <div class="products-footer">
+                            <mat-paginator class="center-paginator" #paginator [length]="products.length"
+                                [pageSize]="5" [disabled]="false" [showFirstLastButtons]="true"
+                                [hidePageSize]="true" [pageIndex]="0" aria-label="Select page">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <div class="step-footer">
+            <mat-divider class="pb-2"></mat-divider>
+            <div class="action-button-container">
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </div>
+    </mat-step>
+
+    <!-- Step 2: Customer Details -->
+    <mat-step [stepControl]="customerForm" label="Fill out details">
+        <div class="step-container">
+            <form [formGroup]="customerForm">
+                <div class="d-flex">
+                    <div class="column pe-3">
+                        <mat-form-field class="row">
+                            <mat-label>Customer Name</mat-label>
+                            <input matInput placeholder="First name Last name" formControlName="customerName">
+                            <mat-error *ngIf="customerForm.get('customerName').hasError('required')">Please set customer
+                                name.</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="row">
+                            <mat-label>Contact Number</mat-label>
+                            <input matInput formControlName="contactNumber">
+                            <mat-error *ngIf="customerForm.get('contactNumber').hasError('required')">Please set contact
+                                number.</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="row">
+                            <mat-label>Delivery Address</mat-label>
+                            <input matInput formControlName="deliveryAddress">
+                            <mat-error *ngIf="customerForm.get('deliveryAddress').hasError('required')">Please set
+                                delivery
+                                address.</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="row">
+                            <mat-label>Delivery Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="deliveryDate">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="customerForm.get('deliveryDate').hasError('required')">Please set delivery
+                                date.</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="row" appearance="outline">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+                                <mat-option *ngFor="let status of status" [value]="status">
+                                    {{status}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="customerForm.get('status').hasError('required')">Please set
+                                status.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="column ps-3">
+                        <mat-form-field class="row" appearance="outline">
+                            <mat-label>Mode of Payment</mat-label>
+                            <mat-select formControlName="paymentMode">
+                                <mat-option *ngFor="let paymentMode of paymentModes" [value]="paymentMode">
+                                    {{paymentMode}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="customerForm.get('paymentMode').hasError('required')">Please select a
+                                payment
+                                mode.</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="row" appearance="outline">
+                            <mat-label>Notes</mat-label>
+                            <textarea matInput placeholder="Additional details or instructions" formControlName="notes"
+                                rows="5"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="step-footer">
+            <mat-divider class="pb-2"></mat-divider>
+            <div class="action-button-container">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </div>
+    </mat-step>
+
+    <!-- Step 3: Order Summary -->
+    <mat-step label="Order Summary">
+        <div class="step-container">
+            <div>
+                <p><strong>Order details:</strong> {{ orderForm.value.orderDetails }}</p>
+                <p><strong>Customer name:</strong> {{ customerForm.value.customerName }}</p>
+                <p><strong>Customer address:</strong> {{ customerForm.value.customerAddress }}</p>
+            </div>
+        </div>
+        <div class="step-footer">
+            <mat-divider class="pb-2"></mat-divider>
+            <div class="action-button-container">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+    </mat-step>
+</mat-stepper>
