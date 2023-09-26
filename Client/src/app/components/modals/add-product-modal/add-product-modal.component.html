@@ -34,7 +34,7 @@
             <mat-label>Size</mat-label>
             <mat-select formControlName="size">
               <mat-option *ngFor="let size of sizes" [value]="size">
-                {{size}}
+                {{ size }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="productForm.get('size').hasError('required')">Please select a size.</mat-error>
@@ -51,6 +51,13 @@
               ">
               Please enter a valid price.
             </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Product description" formControlName="description" rows="5"></textarea>
           </mat-form-field>
         </div>
 

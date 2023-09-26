@@ -27,6 +27,7 @@ export class AddProductModalComponent implements OnInit {
       category: ['', Validators.required],
       size: ['', Validators.required],
       price: ['', Validators.required],
+      description: ['']
     });
 
     this.filteredOptions = this.productForm.get('category').valueChanges.pipe(
