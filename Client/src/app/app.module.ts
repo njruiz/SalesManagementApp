@@ -3,21 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SigninComponent } from './signin/signin.component';
-import { RegisterComponent } from './register/register.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { ComponentsModule } from './components/components.module';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
+import { HomepageComponent } from './home/homepage/homepage.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SigninComponent,
-    RegisterComponent,
-    AdminLayoutComponent,
-  ],
+  declarations: [AppComponent, AdminLayoutComponent, HomepageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,6 +21,8 @@ import { AppRoutingModule } from './app.routing';
     BrowserAnimationsModule,
     AngularMaterialModule,
     ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

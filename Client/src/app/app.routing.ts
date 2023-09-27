@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { HomepageComponent } from './home/homepage/homepage.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    component: HomepageComponent,
   },
   {
     path: '',
@@ -26,14 +26,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-      CommonModule,
-      BrowserModule,
-      RouterModule.forRoot(routes,{
-         useHash: true
-      })
-    ],
-    exports: [
-    ],
-  })
-  export class AppRoutingModule { }
+  imports: [
+    CommonModule,
+    BrowserModule,
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
+  ],
+  exports: [],
+})
+export class AppRoutingModule {}
