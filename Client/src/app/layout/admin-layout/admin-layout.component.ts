@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-admin-layout',

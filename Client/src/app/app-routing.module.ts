@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './home/register/register.component';
 import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
