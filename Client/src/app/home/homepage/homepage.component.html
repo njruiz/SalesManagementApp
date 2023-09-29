@@ -1,45 +1,55 @@
 <div class="logo-img">
-    <img title="Treattle-Logo" src="/assets/img/Treattle-Logo-NoBG.png" />
+  <img title="Treattle-Logo" src="/assets/img/Treattle-Logo-NoBG.png" />
 </div>
 <div class="container" id="container">
-    <div class="form-container sign-up-container">
-        <form action="#">
-            <h1>Create Account</h1>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-            <input type="email" placeholder="Email" />
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <button color="primary">Sign Up</button>
-        </form>
+  <div class="form-container sign-up-container">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="register()"
+      autocomplete="off"
+    >
+      <h1>Create Account</h1>
+      <input type="text" placeholder="First Name" formControlName="firstName" />
+      <input type="text" placeholder="Last Name" formControlName="lastName" />
+      <input type="email" placeholder="Email" formControlName="email" />
+      <input type="text" placeholder="Username" formControlName="username" />
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <button color="primary">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form (ngSubmit)="onLogin()">
+      <h1>Sign in</h1>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <a href="#">Forgot your password?</a>
+      <button color="primary">Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn" (click)="signin_click()">
+          Sign In
+        </button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello there!</h1>
+        <p>Enter your personal details and start shopping with us</p>
+        <button class="ghost" id="signUp" (click)="signup_click()">
+          Sign Up
+        </button>
+      </div>
     </div>
-    <div class="form-container sign-in-container">
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-            <h1>Sign in</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
-            <button color="primary">Sign In</button>
-        </form>
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn" (click)="signin_click()">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello there!</h1>
-                <p>Enter your personal details and start shopping with us</p>
-                <button class="ghost" id="signUp" (click)="signup_click()">Sign Up</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
 
 <footer>
-    <p>
-        © Walhalla Digital Solutions | 2023
-    </p>
+  <p>© Walhalla Digital Solutions | 2023</p>
 </footer>
