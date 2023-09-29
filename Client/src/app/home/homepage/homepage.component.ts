@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,7 +6,10 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { User } from 'src/app/_models/user';
+import { Observable, of } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
@@ -14,6 +17,10 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
+  users: any;
+  model: any = {};
+  currentUser$: Observable<User | null> = of(null);
+
   registerForm: UntypedFormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
@@ -26,6 +33,7 @@ export class HomepageComponent implements OnInit {
   signInButton = document.getElementById('signIn');
 
   constructor(
+    private http: HttpClient,
     private accountService: AccountService,
     private fb: UntypedFormBuilder
   ) {}
@@ -49,9 +57,19 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentUser$ = this.accountService.currentUser$;
+    this.getUsers();
     this.initializeRegistrationForm();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+  }
+
+  getUsers() {
+    this.http.get('https://localhost:5001/api/users').subscribe({
+      next: (response) => (this.users = response),
+      error: (error) => console.log(error),
+      complete: () => console.log('Request has completed'),
+    });
   }
 
   signin_click() {
@@ -69,16 +87,21 @@ export class HomepageComponent implements OnInit {
   }
 
   onLogin(): void {
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    // Here, you can perform the logic to add the new product
-    // For demonstration purposes, we will just log the form value
-    console.log(this.loginForm.value);
+    this.accountService.login(this.model).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => console.log(error),
+    });
   }
 
-  register() {
-    this.accountService.register(this.registerForm.value);
+  register(): void {
+    this.accountService.register(this.model).subscribe({
+      error: (error) => console.log(error),
+    });
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 }
