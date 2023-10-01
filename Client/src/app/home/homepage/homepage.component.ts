@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormGroup,
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -10,6 +9,7 @@ import { User } from 'src/app/_models/user';
 import { Observable, of } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -35,6 +35,7 @@ export class HomepageComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private accountService: AccountService,
+    private router: Router,
     private fb: UntypedFormBuilder
   ) {}
 
@@ -88,9 +89,7 @@ export class HomepageComponent implements OnInit {
 
   onLogin(): void {
     this.accountService.login(this.model).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
+      next: () => this.router.navigateByUrl('/dashboard'),
       error: (error) => console.log(error),
     });
   }
