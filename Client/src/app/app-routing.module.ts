@@ -3,24 +3,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { RegisterComponent } from './home/register/register.component';
-import { SigninComponent } from './signin/signin.component';
+import { HomepageComponent } from './home/homepage/homepage.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'signin', component: SigninComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomepageComponent },
   {
     path: '',
-    component: AdminLayoutComponent,
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        loadChildren: () =>
-          import('./layout/admin-layout/admin-layout.module').then(
-            (m) => m.AdminLayoutModule
-          ),
+        path: 'dashboard',
+        component: DashboardComponent,
       },
+      { path: '**', component: HomepageComponent },
     ],
   },
 ];

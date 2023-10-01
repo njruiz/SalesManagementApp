@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, AdminLayoutComponent, HomepageComponent],
@@ -23,6 +25,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

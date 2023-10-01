@@ -10,6 +10,7 @@ import { Observable, of } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-homepage',
@@ -36,7 +37,8 @@ export class HomepageComponent implements OnInit {
     private http: HttpClient,
     private accountService: AccountService,
     private router: Router,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private toastr: ToastrService
   ) {}
 
   initializeRegistrationForm() {
@@ -69,7 +71,6 @@ export class HomepageComponent implements OnInit {
     this.http.get('https://localhost:5001/api/users').subscribe({
       next: (response) => (this.users = response),
       error: (error) => console.log(error),
-      complete: () => console.log('Request has completed'),
     });
   }
 
@@ -90,13 +91,13 @@ export class HomepageComponent implements OnInit {
   onLogin(): void {
     this.accountService.login(this.model).subscribe({
       next: () => this.router.navigateByUrl('/dashboard'),
-      error: (error) => console.log(error),
+      error: (error) => this.toastr.error(error.error),
     });
   }
 
   register(): void {
     this.accountService.register(this.model).subscribe({
-      error: (error) => console.log(error),
+      error: (error) => this.toastr.error(error.error),
     });
   }
 
