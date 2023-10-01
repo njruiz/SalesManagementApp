@@ -91,7 +91,6 @@ export class HomepageComponent implements OnInit {
   onLogin(): void {
     this.accountService.login(this.model).subscribe({
       next: () => this.router.navigateByUrl('/dashboard'),
-      error: (error) => this.toastr.error(error.error),
     });
   }
 
