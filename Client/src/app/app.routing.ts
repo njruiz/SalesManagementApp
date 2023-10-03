@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { HomepageComponent } from './home/homepage/homepage.component';
+import { HomepageGuard } from './_guards/homepage.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomepageComponent,
+    canActivate: [HomepageGuard],
   },
   {
     path: '',
