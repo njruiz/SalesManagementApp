@@ -19,6 +19,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_modules/shared.module';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SharedModule } from './_modules/shared.module';
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    TextInputComponent,
   ],
   imports: [
     BrowserModule,

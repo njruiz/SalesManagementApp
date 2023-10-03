@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
   FormGroup,
   UntypedFormBuilder,
-  UntypedFormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { User } from 'src/app/_models/user';
@@ -22,14 +25,15 @@ export class HomepageComponent implements OnInit {
   model: any = {};
   currentUser$: Observable<User | null> = of(null);
 
-  registerForm: UntypedFormGroup;
   maxDate: Date;
-  validationErrors: string[] = [];
+  validationErrors: string[] | undefined;
 
   username: string = '';
   password: string = '';
 
+  registerForm: FormGroup = new FormGroup({});
   loginForm: FormGroup;
+
   signUpButton = document.getElementById('signUp');
   signInButton = document.getElementById('signIn');
 
@@ -37,7 +41,7 @@ export class HomepageComponent implements OnInit {
     private http: HttpClient,
     private accountService: AccountService,
     private router: Router,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
 
@@ -45,7 +49,9 @@ export class HomepageComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contactNumber: ['', Validators.required],
+      address: ['', Validators.required],
       username: ['', Validators.required],
       password: [
         '',
@@ -56,12 +62,19 @@ export class HomepageComponent implements OnInit {
           Validators.pattern(/^(?=[^\d]*\d)(?=[^\W]*\W)/),
         ],
       ],
+      confirmPassword: [
+        '',
+        [Validators.required, this.matchValues('password')],
+      ],
+    });
+    this.registerForm.controls['password'].valueChanges.subscribe({
+      next: () =>
+        this.registerForm.controls['confirmPassword'].updateValueAndValidity(),
     });
   }
 
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
-    this.getUsers();
     this.initializeRegistrationForm();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
@@ -95,12 +108,25 @@ export class HomepageComponent implements OnInit {
   }
 
   register(): void {
-    this.accountService.register(this.model).subscribe({
-      error: (error) => this.toastr.error(error.error),
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/dashboard');
+      },
+      error: (error) => {
+        this.validationErrors = error;
+      },
     });
   }
 
   logout() {
     this.accountService.logout();
+  }
+
+  matchValues(matchTo: string): ValidatorFn {
+    return (control: AbstractControl) => {
+      return control?.value === control?.parent?.controls[matchTo].value
+        ? null
+        : { isMatching: true };
+    };
   }
 }
