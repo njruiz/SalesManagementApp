@@ -16,6 +16,8 @@ import { AddInventoryProductModalComponent } from './modals/add-inventory-produc
 import { AddInventoryResourceModalComponent } from './modals/add-inventory-resource-modal/add-inventory-resource-modal.component';
 import { AddOrderModalComponent } from './modals/add-order-modal/add-order-modal.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from '../_modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SharedModule
   ],
   exports: [SidebarComponent],
 })

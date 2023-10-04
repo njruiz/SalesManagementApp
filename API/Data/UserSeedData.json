@@ -1,0 +1,77 @@
+[
+  {
+    "UserName": "Janet",
+    "FirstName": "Janet",
+    "LastName": "Dale",
+    "Address": "Yukon, San Marino",
+    "ContactNumber": "09957662388",
+    "Created": "2023-01-20",
+    "LastActive": "2023-08-19",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/13.jpg",
+        "IsMain": true
+      }
+    ]
+  },
+  {
+    "UserName": "Kaye",
+    "FirstName": "Kaye",
+    "LastName": "Elliott",
+    "Address": "Nash, Estonia",
+    "ContactNumber": "09194567856",
+    "Created": "2023-09-07",
+    "LastActive": "2023-10-15",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/20.jpg",
+        "IsMain": true
+      }
+    ]
+  },
+  {
+    "UserName": "Jodie",
+    "FirstName": "Jodie",
+    "LastName": "Jacobs",
+    "Address": "Edmund, Nigeria",
+    "ContactNumber": "09951235598",
+    "Created": "2023-07-03",
+    "LastActive": "2023-09-30",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/61.jpg",
+        "IsMain": true
+      }
+    ]
+  },
+  {
+    "UserName": "Tia",
+    "FirstName": "Tia",
+    "LastName": "Stark",
+    "Address": "Hayes, Colombia",
+    "ContactNumber": "09197821566",
+    "Created": "2023-04-11",
+    "LastActive": "2023-12-13",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/12.jpg",
+        "IsMain": true
+      }
+    ]
+  },
+  {
+    "UserName": "Gale",
+    "FirstName": "Gale",
+    "LastName": "Stone",
+    "Address": "Makena, St. Pierre and Miquelon",
+    "ContactNumber": "09213364822",
+    "Created": "2023-02-28",
+    "LastActive": "2023-09-03",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/83.jpg",
+        "IsMain": true
+      }
+    ]
+  }
+]

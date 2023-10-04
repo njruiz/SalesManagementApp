@@ -3,26 +3,31 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { RegisterComponent } from './home/register/register.component';
-import { SigninComponent } from './signin/signin.component';
+import { HomepageComponent } from './home/homepage/homepage.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { HomepageGuard } from './_guards/homepage.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'signin', component: SigninComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomepageComponent, canActivate: [HomepageGuard] },
   {
     path: '',
-    component: AdminLayoutComponent,
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        loadChildren: () =>
-          import('./layout/admin-layout/admin-layout.module').then(
-            (m) => m.AdminLayoutModule
-          ),
+        path: 'dashboard',
+        component: DashboardComponent,
       },
     ],
   },
+  { path: 'errors', component: TestErrorComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,8 +1,17 @@
-namespace API.Entities
+namespace API.Entities;
+
+public class AppUser
 {
-    public class AppUser
-    {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-    }
+    public int Id { get; set; }
+    public string UserName { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Address { get; set; }
+    public string Email { get; set; }
+    public string ContactNumber { get; set; }
+    public byte[] PasswordHash { get; set; }
+    public byte[] PasswordSalt { get; set; }
+    public DateTime Created { get; set; } = DateTime.UtcNow;
+    public DateTime LastActive { get; set; } = DateTime.UtcNow;
+    public List<Photo> Photos { get; set; } = new();
 }

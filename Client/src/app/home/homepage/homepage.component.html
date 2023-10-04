@@ -1,45 +1,118 @@
-<div class="logo-img">
-    <img title="Treattle-Logo" src="/assets/img/Treattle-Logo-NoBG.png" />
-</div>
 <div class="container" id="container">
-    <div class="form-container sign-up-container">
-        <form action="#">
-            <h1>Create Account</h1>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-            <input type="email" placeholder="Email" />
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <button color="primary">Sign Up</button>
-        </form>
-    </div>
-    <div class="form-container sign-in-container">
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-            <h1>Sign in</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
-            <button color="primary">Sign In</button>
-        </form>
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn" (click)="signin_click()">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello there!</h1>
-                <p>Enter your personal details and start shopping with us</p>
-                <button class="ghost" id="signUp" (click)="signup_click()">Sign Up</button>
-            </div>
+  <div class="form-container sign-up-container">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="registerForm.valid && register()"
+      autocomplete="off"
+    >
+      <h1>Create Account</h1>
+      <div class="d-flex">
+        <app-text-input
+          class="me-1"
+          [formControl]="$any(registerForm.controls['firstName'])"
+          [label]="'First Name'"
+        ></app-text-input>
+        <app-text-input
+          class="ms-1"
+          [formControl]="$any(registerForm.controls['lastName'])"
+          [label]="'Last Name'"
+        ></app-text-input>
+      </div>
+      <app-text-input
+        [formControl]="$any(registerForm.controls['email'])"
+        [label]="'Email Address'"
+      ></app-text-input>
+      <app-text-input
+        [formControl]="$any(registerForm.controls['contactNumber'])"
+        [label]="'Contact Number'"
+      ></app-text-input>
+      <app-text-input
+        [formControl]="$any(registerForm.controls['address'])"
+        [label]="'Address'"
+      ></app-text-input>
+      <div class="divider"></div>
+      <app-text-input
+        [formControl]="$any(registerForm.controls['username'])"
+        [label]="'Username'"
+      ></app-text-input>
+      <app-text-input
+        [formControl]="$any(registerForm.controls['password'])"
+        [label]="'Password'"
+        [type]="'password'"
+      ></app-text-input>
+      <app-text-input
+        [formControl]="$any(registerForm.controls['confirmPassword'])"
+        [label]="'Confirm Password'"
+        [type]="'password'"
+      ></app-text-input>
+      <button
+        [disabled]="!registerForm.valid"
+        class="btn mt-3"
+        color="primary"
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" autocomplete="off">
+      <h1>Sign in</h1>
+      <input
+        name="username"
+        [formControl]="loginForm.controls['username']"
+        type="text"
+        placeholder="Username"
+      />
+      <input
+        name="password"
+        [formControl]="loginForm.controls['password']"
+        type="password"
+        placeholder="Password"
+      />
+      <a href="#">Forgot your password?</a>
+      <div class="row" *ngIf="validationErrors">
+        <ul class="text-danger">
+          <li *ngFor="let error of validationErrors">
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <button color="primary" type="submit">Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <div class="logo-img">
+          <img
+            title="Treattle-Logo"
+            src="/assets/img/Treattle-Logo-Inverted.png"
+          />
         </div>
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn" (click)="signin_click()">
+          Sign In
+        </button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <div class="logo-img">
+          <img
+            title="Treattle-Logo"
+            src="/assets/img/Treattle-Logo-Inverted.png"
+          />
+        </div>
+        <h1>Hello there!</h1>
+        <p>Enter your personal details and start shopping with us</p>
+        <button class="ghost" id="signUp" (click)="signup_click()">
+          Sign Up
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <footer>
-    <p>
-        © Walhalla Digital Solutions | 2023
-    </p>
+  <p>© Walhalla Digital Solutions | 2023</p>
 </footer>

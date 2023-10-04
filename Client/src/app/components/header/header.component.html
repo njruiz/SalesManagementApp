@@ -1,28 +1,34 @@
-<div class="header my-4 d-flex justify-content-between">
+<div
+  *ngIf="accountService.currentUser$ | async as user"
+  class="header my-4 d-flex justify-content-between"
+>
   <div *ngIf="dashboardMode; else notDashboardScreen" class="header-message">
     <div class="header-mainMessage">
-      <div>Welcome back, {{ firstName }}</div>
+      <div>Welcome back, {{ user.firstName }}</div>
     </div>
     <div class="header-subMessage pt-3">
       <div>{{ dashboard_subMessage }}</div>
     </div>
   </div>
   <div class="header-rightMenu float-right">
-    <ul class="header-nav">
-      <li class="nav-item dropdown">
-        <img alt="{{ firstName }}" src="/assets/img/NJ-2.jpg" />
-        <a
-          class="ps-2 dropdown-toggle text-dark text-decoration-none"
-          dropdownToggle
-          >{{ firstName + " " + lastName }}
-        </a>
-        <div class="dropdown-menu mt-2" *dropdownMenu>
-          <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Logout</a>
-        </div>
-      </li>
-    </ul>
+    <div class="dropdown" dropdown>
+      <img
+        alt="{{ user.firstName }}"
+        src="{{ user.photoUrl || './assets/img/user.png' }}"
+      />
+      <a
+        href
+        class="ps-2 dropdown-toggle text-dark text-decoration-none"
+        dropdownToggle
+        (click)="(false)"
+        >{{ user.firstName + " " + user.lastName }}
+      </a>
+      <div class="dropdown-menu mt-2" *dropdownMenu>
+        <a class="dropdown-item">Edit Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+    </div>
   </div>
 
   <ng-template #notDashboardScreen>
