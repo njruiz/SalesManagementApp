@@ -1,6 +1,10 @@
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="registerForm.valid && register()"
+      autocomplete="off"
+    >
       <h1>Create Account</h1>
       <div class="d-flex">
         <app-text-input
@@ -52,17 +56,17 @@
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form #loginForm="ngForm" (ngSubmit)="onLogin()" autocomplete="off">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" autocomplete="off">
       <h1>Sign in</h1>
       <input
         name="username"
-        [(ngModel)]="model.username"
+        [formControl]="loginForm.controls['username']"
         type="text"
         placeholder="Username"
       />
       <input
         name="password"
-        [(ngModel)]="model.password"
+        [formControl]="loginForm.controls['password']"
         type="password"
         placeholder="Password"
       />

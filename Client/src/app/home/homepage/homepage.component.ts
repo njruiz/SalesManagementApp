@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
-  UntypedFormBuilder,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
@@ -32,7 +30,7 @@ export class HomepageComponent implements OnInit {
   password: string = '';
 
   registerForm: FormGroup = new FormGroup({});
-  loginForm: FormGroup;
+  loginForm: FormGroup = new FormGroup({});
 
   signUpButton = document.getElementById('signUp');
   signInButton = document.getElementById('signIn');
@@ -41,9 +39,21 @@ export class HomepageComponent implements OnInit {
     private http: HttpClient,
     private accountService: AccountService,
     private router: Router,
-    private fb: FormBuilder,
-    private toastr: ToastrService
+    private fb: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.currentUser$ = this.accountService.currentUser$;
+    this.initializeLoginForm();
+    this.initializeRegistrationForm();
+  }
+
+  initializeLoginForm() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
   initializeRegistrationForm() {
     this.registerForm = this.fb.group({
@@ -73,13 +83,6 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUser$;
-    this.initializeRegistrationForm();
-    this.maxDate = new Date();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-  }
-
   getUsers() {
     this.http.get('https://localhost:5001/api/users').subscribe({
       next: (response) => (this.users = response),
@@ -87,22 +90,20 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  signin_click() {
-    const container = document.getElementById('container');
-    if (container) {
-      container.classList.remove('right-panel-active');
-    }
+  logout() {
+    this.accountService.logout();
   }
 
-  signup_click() {
-    const container = document.getElementById('container');
-    if (container) {
-      container.classList.add('right-panel-active');
-    }
+  matchValues(matchTo: string): ValidatorFn {
+    return (control: AbstractControl) => {
+      return control?.value === control?.parent?.controls[matchTo].value
+        ? null
+        : { isMatching: true };
+    };
   }
 
   onLogin(): void {
-    this.accountService.login(this.model).subscribe({
+    this.accountService.login(this.loginForm.value).subscribe({
       next: () => this.router.navigateByUrl('/dashboard'),
     });
   }
@@ -118,15 +119,17 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  logout() {
-    this.accountService.logout();
+  signin_click() {
+    const container = document.getElementById('container');
+    if (container) {
+      container.classList.remove('right-panel-active');
+    }
   }
 
-  matchValues(matchTo: string): ValidatorFn {
-    return (control: AbstractControl) => {
-      return control?.value === control?.parent?.controls[matchTo].value
-        ? null
-        : { isMatching: true };
-    };
+  signup_click() {
+    const container = document.getElementById('container');
+    if (container) {
+      container.classList.add('right-panel-active');
+    }
   }
 }

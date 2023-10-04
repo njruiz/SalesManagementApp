@@ -12,7 +12,10 @@
   </div>
   <div class="header-rightMenu float-right">
     <div class="dropdown" dropdown>
-      <img alt="{{ user.firstName }}" src="/assets/img/NJ-2.jpg" />
+      <img
+        alt="{{ user.firstName }}"
+        src="{{ user.photoUrl || './assets/img/user.png' }}"
+      />
       <a
         href
         class="ps-2 dropdown-toggle text-dark text-decoration-none"
