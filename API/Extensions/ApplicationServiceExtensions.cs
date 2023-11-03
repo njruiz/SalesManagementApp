@@ -10,11 +10,6 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,
             IConfiguration config)
         {
-            services.AddDbContext<DataContext>(opt =>
-            {
-                //opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
-                opt.UseSqlServer(config.GetConnectionString("ProdConnection"));
-            });
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy => policy.AllowAnyHeader()
