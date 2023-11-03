@@ -6,12 +6,25 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connString = "";
 
 //services container
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+
+if (builder.Environment.IsDevelopment())
+    connString = builder.Configuration.GetConnectionString("DefaultConnection");
+else
+{
+    connString = builder.Configuration.GetConnectionString("ProdConnection");
+}
+
+builder.Services.AddDbContext<DataContext>(opt =>
+{
+    opt.UseSqlServer(connString);
+});
 
 var app = builder.Build();
 
