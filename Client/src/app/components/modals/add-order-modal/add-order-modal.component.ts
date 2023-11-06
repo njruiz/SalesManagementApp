@@ -10,9 +10,8 @@ import { StepperOrientation } from '@angular/material/stepper';
 @Component({
   selector: 'app-add-order-modal',
   templateUrl: './add-order-modal.component.html',
-  styleUrls: ['./add-order-modal.component.css']
+  styleUrls: ['./add-order-modal.component.css'],
 })
-
 export class AddOrderModalComponent implements OnInit {
   orderForm: FormGroup;
   customerForm: FormGroup;
@@ -30,39 +29,49 @@ export class AddOrderModalComponent implements OnInit {
 
   products: Product[] = [
     {
-      id: '202301',
-      name: 'Dark Chocolate',
+      productCode: '202301',
+      productName: 'Dark Chocolate',
       category: 'Ice Cream Cake',
       size: 'Regular',
       price: 135,
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      id: '202302',
-      name: 'Coffee',
+      productCode: '202302',
+      productName: 'Coffee',
       category: 'Ice Cream Cake',
       size: 'Large',
       price: 325,
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      id: '202303',
-      name: 'Ube Keso',
+      productCode: '202303',
+      productName: 'Ube Keso',
       category: 'Ice Cream Cake',
       size: 'Large',
       price: 325,
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      id: '202303',
-      name: 'Chocolate Matcha',
+      productCode: '202303',
+      productName: 'Chocolate Matcha',
       category: 'Ice Cream Cake',
       size: 'Large',
       price: 135,
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      id: '202303',
-      name: 'Strawberry',
+      productCode: '202303',
+      productName: 'Strawberry',
       category: 'Ice Cream Cake',
       size: 'Large',
       price: 325,
+      flavor: 'Choco',
+      description: 'Test',
     },
     // {
     //   id: '202303',
@@ -96,9 +105,9 @@ export class AddOrderModalComponent implements OnInit {
       contactNumber: ['', Validators.required],
       deliveryAddress: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      paymentMode:  ['', Validators.required],
-      status:  ['', Validators.required],
-      notes: ['']
+      paymentMode: ['', Validators.required],
+      status: ['', Validators.required],
+      notes: [''],
     });
   }
 

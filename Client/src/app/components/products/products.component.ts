@@ -1,78 +1,56 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { AddProductModalComponent } from '../modals/add-product-modal/add-product-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/_models/product';
+import { ProductService } from 'src/app/_services/product.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent {
-  displayedColumns = ['id', 'name', 'category', 'size', 'price', 'actions'];
-  dataSource: MatTableDataSource<Product>;
+export class ProductsComponent implements OnInit {
+  products: Partial<Product[]>;
+  displayedColumns = ['productCode', 'productName', 'size', 'price', 'actions'];
+  dataSource = new MatTableDataSource<Product>();
 
   sortedData: Product[];
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource([{
-      id: '202301',
-      name: 'Dark Chocolate IceCream Cake',
-      category: 'IceCream Cake',
-      size: 'Regular',
-      price: 135,
-    },
-    {
-      id: '202302',
-      name: 'Coffee IceCream Cake',
-      category: 'IceCream Cake',
-      size: 'Large',
-      price: 325,
-    },
-    {
-      id: '202303',
-      name: 'Ube Keso IceCream Cake',
-      category: 'IceCream Cake',
-      size: 'Large',
-      price: 325,
-    },
-    {
-      id: '202304',
-      name: 'Strawberry Choco Cone Bites',
-      category: 'Cone Bites',
-      size: 'Regular',
-      price: 120,
-    },
-    {
-      id: '202305',
-      name: 'Red Velvet Cone Bites',
-      category: 'Cone Bites',
-      size: 'Regular',
-      price: 120,
-    }]);
+  constructor(
+    public dialog: MatDialog,
+    private productService: ProductService
+  ) {}
 
-    this.sortedData = this.dataSource.data.slice();
+  ngOnInit(): void {
+    this.getProducts();
   }
 
-  openProductFormDialog(): void {
-    this.dialog.open(AddProductModalComponent, {
-      width: '400px'
+  getProducts(): void {
+    this.productService.getProducts().subscribe((products) => {
+      this.dataSource.data = products;
+      this.dataSource._updateChangeSubscription();
+      this.sortedData = this.dataSource.data.slice();
     });
   }
 
-  setStatusFontColor(status: string) {
-    switch (status) {
-      case 'Available':
-        return 'RGB(8, 148, 4)';
-      case 'Low Stocks':
-        return 'RGB(255, 191, 0)';
-      case 'Sold Out':
-        return 'red';
-    }
+  openProductFormDialog(): void {
+    const dialogRef = this.dialog.open(AddProductModalComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((newProduct) => {
+      if (newProduct) {
+        // Add the newProduct to the products array
+        const currentData = this.dataSource.data;
+        currentData.push(newProduct);
+        this.dataSource.data = currentData;
+        this.sortedData = this.dataSource.data.slice();
+      }
+    });
   }
 
   sortData(sort: Sort) {
@@ -83,17 +61,15 @@ export class ProductsComponent {
     }
 
     this.sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === "asc";
+      const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case "id":
-          return compare(a.id, b.id, isAsc);
-        case "name":
-          return compare(a.name, b.name, isAsc);
-        case "category":
-          return compare(a.category, b.category, isAsc);
-        case "size":
+        case 'productCode':
+          return compare(a.productCode, b.productCode, isAsc);
+        case 'productName':
+          return compare(a.productName, b.productName, isAsc);
+        case 'size':
           return compare(a.size, b.size, isAsc);
-        case "price":
+        case 'price':
           return compare(a.price, b.price, isAsc);
         default:
           return 0;
