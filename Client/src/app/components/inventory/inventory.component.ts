@@ -13,12 +13,10 @@ import { AddInventoryResourceModalComponent } from '../modals/add-inventory-reso
 })
 export class InventoryComponent {
   displayedProductColumns = [
-    'name',
-    'category',
+    'productName',
     'size',
     'status',
     'stocks',
-    'price',
     'actions',
   ];
   displayedResourceColumns = [
@@ -48,7 +46,7 @@ export class InventoryComponent {
         price: 135,
         productCode: '202301',
         flavor: 'Choco',
-        description: 'Test'
+        description: 'Test',
       },
       {
         productName: 'Coffee',
@@ -59,7 +57,7 @@ export class InventoryComponent {
         price: 135,
         productCode: '202302',
         flavor: 'Choco',
-        description: 'Test'
+        description: 'Test',
       },
       {
         productName: 'Ube Keso',
@@ -70,7 +68,7 @@ export class InventoryComponent {
         price: 325,
         productCode: '202303',
         flavor: 'Choco',
-        description: 'Test'
+        description: 'Test',
       },
       {
         productName: 'Strawberry Choco',
@@ -81,7 +79,7 @@ export class InventoryComponent {
         price: 135,
         productCode: '202304',
         flavor: 'Choco',
-        description: 'Test'
+        description: 'Test',
       },
       {
         productName: 'Red Velvet',
@@ -92,7 +90,7 @@ export class InventoryComponent {
         price: 135,
         productCode: '202305',
         flavor: 'Choco',
-        description: 'Test'
+        description: 'Test',
       },
     ]);
 
@@ -191,16 +189,14 @@ export class InventoryComponent {
     this.sortedProductData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'name':
+        case 'productName':
           return compare(a.productName, b.productName, isAsc);
-        case 'category':
-          return compare(a.category, b.category, isAsc);
+        case 'size':
+          return compare(a.size, b.size, isAsc);
         case 'status':
           return compare(a.status, b.status, isAsc);
         case 'stocks':
           return compare(a.stocks, b.stocks, isAsc);
-        case 'price':
-          return compare(a.price, b.price, isAsc);
         default:
           return 0;
       }
