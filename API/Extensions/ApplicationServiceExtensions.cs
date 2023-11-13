@@ -18,8 +18,8 @@ namespace API.Extensions
                     .WithOrigins("https://localhost:4200"));
             });
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

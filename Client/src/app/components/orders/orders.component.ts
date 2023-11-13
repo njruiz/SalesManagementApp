@@ -21,39 +21,44 @@ export class OrdersComponent {
 
   products: Product[] = [
     {
-      id: '202301',
-      name: 'Dark Chocolate IceCream Cake',
-      category: 'IceCream Cake',
+      productCode: '202301',
+      productName: 'Dark Chocolate IceCream Cake',
       size: 'Regular',
       price: 135,
+      flavor: 'Choco',
+      description: 'Test'
     },
     {
-      id: '202302',
-      name: 'Coffee IceCream Cake',
-      category: 'IceCream Cake',
+      productCode: '202302',
+      productName: 'Coffee IceCream Cake',
       size: 'Large',
       price: 325,
+      flavor: 'Choco',
+      description: 'Test'
     },
     {
-      id: '202303',
-      name: 'Ube Keso IceCream Cake',
-      category: 'IceCream Cake',
+      productCode: '202303',
+      productName: 'Ube Keso IceCream Cake',
       size: 'Large',
       price: 325,
+      flavor: 'Choco',
+      description: 'Test'
     },
     {
-      id: '202304',
-      name: 'Strawberry Choco Cone Bites',
-      category: 'Cone Bites',
+      productCode: '202304',
+      productName: 'Strawberry Choco Cone Bites',
       size: 'Regular',
       price: 120,
+      flavor: 'Choco',
+      description: 'Test'
     },
     {
-      id: '202305',
-      name: 'Red Velvet Cone Bites',
-      category: 'Cone Bites',
+      productCode: '202305',
+      productName: 'Red Velvet Cone Bites',
       size: 'Regular',
       price: 120,
+      flavor: 'Choco',
+      description: 'Test'
     }
   ];
 

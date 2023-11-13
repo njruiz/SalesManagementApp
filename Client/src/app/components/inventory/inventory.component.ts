@@ -12,11 +12,25 @@ import { AddInventoryResourceModalComponent } from '../modals/add-inventory-reso
   styleUrls: ['./inventory.component.css'],
 })
 export class InventoryComponent {
-  displayedProductColumns = ['name', 'category', 'size', 'status', 'stocks', 'price', 'actions'];
-  displayedResourceColumns = ['name', 'brand', 'size', 'status', 'quantity', 'price', 'actions'];
+  displayedProductColumns = [
+    'productName',
+    'size',
+    'status',
+    'stocks',
+    'actions',
+  ];
+  displayedResourceColumns = [
+    'name',
+    'brand',
+    'size',
+    'status',
+    'quantity',
+    'price',
+    'actions',
+  ];
 
-  dataSource_Product: MatTableDataSource<InventoryItem>;  
-  dataSource_Resource: MatTableDataSource<InventoryItem>;  
+  dataSource_Product: MatTableDataSource<InventoryItem>;
+  dataSource_Resource: MatTableDataSource<InventoryItem>;
 
   sortedProductData: InventoryItem[];
   sortedResourceData: InventoryItem[];
@@ -24,99 +38,119 @@ export class InventoryComponent {
   constructor(public dialog: MatDialog) {
     this.dataSource_Product = new MatTableDataSource([
       {
-        name: 'Dark Chocolate',
+        productName: 'Dark Chocolate',
         category: 'Ice Cream Cake',
         size: 'Regular',
         status: 'Available',
         stocks: 31,
         price: 135,
-        id: '202301',
+        productCode: '202301',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Coffee',
+        productName: 'Coffee',
         category: 'Ice Cream Cake',
         size: 'Regular',
         status: 'Low Stocks',
         stocks: 5,
         price: 135,
-        id: '202302',
+        productCode: '202302',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Ube Keso',
+        productName: 'Ube Keso',
         category: 'Ice Cream Cake',
         size: 'Large',
         status: 'Sold Out',
         stocks: 0,
         price: 325,
-        id: '202303',
+        productCode: '202303',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Strawberry Choco',
+        productName: 'Strawberry Choco',
         category: 'Cone Bites',
         size: 'Regular',
         status: 'Available',
         stocks: 123,
         price: 135,
-        id: '202304',
+        productCode: '202304',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Red Velvet',
+        productName: 'Red Velvet',
         category: 'Cone Bites',
         size: 'Regular',
         status: 'Available',
         stocks: 15,
         price: 135,
-        id: '202305',
-      }
+        productCode: '202305',
+        flavor: 'Choco',
+        description: 'Test',
+      },
     ]);
 
     this.dataSource_Resource = new MatTableDataSource([
       {
-        name: 'Tin Can',
-        brand: 'Ava\'s Baking Supplies',
+        productName: 'Tin Can',
+        brand: "Ava's Baking Supplies",
         status: 'Available',
         size: 'Large',
         quantity: 120,
         price: 54,
-        id: 'R-20230601',
+        productCode: 'R-20230601',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Tin Can',
+        productName: 'Tin Can',
         brand: 'Shopee',
         status: 'Available',
         size: 'Regular',
         quantity: 95,
         price: 45,
-        id: 'R-20230602',
+        productCode: 'R-20230602',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Condensed Milk',
-        brand: 'Angel\'s',
+        productName: 'Condensed Milk',
+        brand: "Angel's",
         status: 'Available',
         size: '325 mL',
         quantity: 12,
         price: 45,
-        id: 'R-20230603',
+        productCode: 'R-20230603',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'All Pupose Cream',
+        productName: 'All Pupose Cream',
         brand: 'Nestle',
         status: 'Available',
         size: '1 L',
         quantity: 4,
         price: 298,
-        id: 'R-20230604',
+        productCode: 'R-20230604',
+        flavor: 'Choco',
+        description: 'Test',
       },
       {
-        name: 'Chocolate Bar',
+        productName: 'Chocolate Bar',
         brand: 'Goya',
         status: 'Available',
         size: '1 Kg',
         quantity: 9,
         price: 275,
-        id: 'R-20230605',
-      }
-    ]);  
+        productCode: 'R-20230605',
+        flavor: 'Choco',
+        description: 'Test',
+      },
+    ]);
 
     this.sortedProductData = this.dataSource_Product.data.slice();
     this.sortedResourceData = this.dataSource_Resource.data.slice();
@@ -124,13 +158,13 @@ export class InventoryComponent {
 
   openAddProductFormDialog(): void {
     this.dialog.open(AddInventoryProductModalComponent, {
-      width: '400px'
+      width: '400px',
     });
   }
 
   openAddResourceFormDialog(): void {
     this.dialog.open(AddInventoryResourceModalComponent, {
-      width: '400px'
+      width: '400px',
     });
   }
 
@@ -155,16 +189,14 @@ export class InventoryComponent {
     this.sortedProductData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'name':
-          return compare(a.name, b.name, isAsc);
-        case 'category':
-          return compare(a.category, b.category, isAsc);
+        case 'productName':
+          return compare(a.productName, b.productName, isAsc);
+        case 'size':
+          return compare(a.size, b.size, isAsc);
         case 'status':
           return compare(a.status, b.status, isAsc);
         case 'stocks':
           return compare(a.stocks, b.stocks, isAsc);
-        case 'price':
-          return compare(a.price, b.price, isAsc);
         default:
           return 0;
       }
@@ -182,7 +214,7 @@ export class InventoryComponent {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'name':
-          return compare(a.name, b.name, isAsc);
+          return compare(a.productName, b.productName, isAsc);
         case 'status':
           return compare(a.status, b.status, isAsc);
         case 'quantity':

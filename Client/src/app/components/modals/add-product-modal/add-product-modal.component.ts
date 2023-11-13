@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { ProductService } from 'src/app/_services/product.service';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -18,16 +19,17 @@ export class AddProductModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<AddProductModalComponent>
+    private dialogRef: MatDialogRef<AddProductModalComponent>,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      productName: ['', Validators.required],
       category: ['', Validators.required],
+      flavor: ['', Validators.required],
       size: ['', Validators.required],
       price: ['', Validators.required],
-      description: ['']
+      description: [''],
     });
 
     this.filteredOptions = this.productForm.get('category').valueChanges.pipe(
@@ -45,13 +47,15 @@ export class AddProductModalComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
+    
+    this.addProduct();
+  }
 
-    // Here, you can perform the logic to add the new product
-    // For demonstration purposes, we will just log the form value
-    console.log(this.productForm.value);
-
-    // Close the modal dialog
-    this.dialogRef.close();
+  addProduct() {
+    this.productService.addProduct(this.productForm.value).subscribe({
+      next: (response) => this.dialogRef.close(response),
+      error: (error) => console.log(error),
+    });
   }
 
   private _filter(value: string): string[] {

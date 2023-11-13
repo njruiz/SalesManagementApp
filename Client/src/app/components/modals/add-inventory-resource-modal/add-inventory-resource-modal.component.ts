@@ -8,7 +8,7 @@ import { InventoryItem } from 'src/app/_models/inventoryItem';
 @Component({
   selector: 'app-add-inventory-resource-modal',
   templateUrl: './add-inventory-resource-modal.component.html',
-  styleUrls: ['./add-inventory-resource-modal.component.css']
+  styleUrls: ['./add-inventory-resource-modal.component.css'],
 })
 export class AddInventoryResourceModalComponent implements OnInit {
   productForm: FormGroup;
@@ -17,50 +17,60 @@ export class AddInventoryResourceModalComponent implements OnInit {
 
   resources: InventoryItem[] = [
     {
-      name: 'Tin Can',
-      brand: 'Ava\'s Baking Supplies',
+      productName: 'Tin Can',
+      brand: "Ava's Baking Supplies",
       status: 'Available',
       size: 'Large',
       quantity: 120,
       price: 54,
-      id: 'R-20230601',
+      productCode: 'R-20230601',
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      name: 'Tin Can',
+      productName: 'Tin Can',
       brand: 'Shopee',
       status: 'Available',
       size: 'Regular',
       quantity: 95,
       price: 45,
-      id: 'R-20230602',
+      productCode: 'R-20230602',
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      name: 'Condensed Milk',
-      brand: 'Angel\'s',
+      productName: 'Condensed Milk',
+      brand: "Angel's",
       status: 'Available',
       size: '325 mL',
       quantity: 12,
       price: 45,
-      id: 'R-20230603',
+      productCode: 'R-20230603',
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      name: 'All Pupose Cream',
+      productName: 'All Pupose Cream',
       brand: 'Nestle',
       status: 'Available',
       size: '1 L',
       quantity: 4,
       price: 298,
-      id: 'R-20230604',
+      productCode: 'R-20230604',
+      flavor: 'Choco',
+      description: 'Test',
     },
     {
-      name: 'Chocolate Bar',
+      productName: 'Chocolate Bar',
       brand: 'Goya',
       status: 'Available',
       size: '1 Kg',
       quantity: 9,
       price: 275,
-      id: 'R-20230605',
-    }
+      productCode: 'R-20230605',
+      flavor: 'Choco',
+      description: 'Test',
+    },
   ];
 
   filteredOptions: Observable<string[]>;
@@ -68,7 +78,7 @@ export class AddInventoryResourceModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddInventoryResourceModalComponent>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
