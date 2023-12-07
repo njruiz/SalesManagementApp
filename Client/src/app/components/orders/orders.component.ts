@@ -20,46 +20,46 @@ export class OrdersComponent {
   sortedData: Order[];
 
   products: Product[] = [
-    {
-      productCode: '202301',
-      productName: 'Dark Chocolate IceCream Cake',
-      size: 'Regular',
-      price: 135,
-      flavor: 'Choco',
-      description: 'Test'
-    },
-    {
-      productCode: '202302',
-      productName: 'Coffee IceCream Cake',
-      size: 'Large',
-      price: 325,
-      flavor: 'Choco',
-      description: 'Test'
-    },
-    {
-      productCode: '202303',
-      productName: 'Ube Keso IceCream Cake',
-      size: 'Large',
-      price: 325,
-      flavor: 'Choco',
-      description: 'Test'
-    },
-    {
-      productCode: '202304',
-      productName: 'Strawberry Choco Cone Bites',
-      size: 'Regular',
-      price: 120,
-      flavor: 'Choco',
-      description: 'Test'
-    },
-    {
-      productCode: '202305',
-      productName: 'Red Velvet Cone Bites',
-      size: 'Regular',
-      price: 120,
-      flavor: 'Choco',
-      description: 'Test'
-    }
+    // {
+    //   productCode: '202301',
+    //   productName: 'Dark Chocolate IceCream Cake',
+    //   size: 'Regular',
+    //   price: 135,
+    //   flavor: 'Choco',
+    //   description: 'Test'
+    // },
+    // {
+    //   productCode: '202302',
+    //   productName: 'Coffee IceCream Cake',
+    //   size: 'Large',
+    //   price: 325,
+    //   flavor: 'Choco',
+    //   description: 'Test'
+    // },
+    // {
+    //   productCode: '202303',
+    //   productName: 'Ube Keso IceCream Cake',
+    //   size: 'Large',
+    //   price: 325,
+    //   flavor: 'Choco',
+    //   description: 'Test'
+    // },
+    // {
+    //   productCode: '202304',
+    //   productName: 'Strawberry Choco Cone Bites',
+    //   size: 'Regular',
+    //   price: 120,
+    //   flavor: 'Choco',
+    //   description: 'Test'
+    // },
+    // {
+    //   productCode: '202305',
+    //   productName: 'Red Velvet Cone Bites',
+    //   size: 'Regular',
+    //   price: 120,
+    //   flavor: 'Choco',
+    //   description: 'Test'
+    // }
   ];
 
   @ViewChild(MatSort) sort: MatSort;

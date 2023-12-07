@@ -26,6 +26,7 @@ namespace API.Data
         public async Task<Product> GetProductAsync(string productCode)
         {
             return await _context.Products
+                .Include(p => p.Photos)
                 .SingleOrDefaultAsync(x => x.ProductCode == productCode);
         }
 
