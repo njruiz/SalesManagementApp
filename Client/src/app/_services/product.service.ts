@@ -26,6 +26,13 @@ export class ProductService {
       );
   }
 
+  deleteProduct(productCode) {
+    return this.http.delete(
+      this.baseUrl + 'productmaintenance/delete-product/' + productCode,
+      {}
+    );
+  }
+
   getProducts() {
     if (this.products.length > 0) return of(this.products);
 

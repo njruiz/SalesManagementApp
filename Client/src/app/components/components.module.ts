@@ -18,6 +18,7 @@ import { AddOrderModalComponent } from './modals/add-order-modal/add-order-modal
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../_modules/shared.module';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SharedModule } from '../_modules/shared.module';
     AddInventoryResourceModalComponent,
     AddOrderModalComponent,
     ProductCardComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

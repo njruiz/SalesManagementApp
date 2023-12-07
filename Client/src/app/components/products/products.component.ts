@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/_models/product';
 import { ProductService } from 'src/app/_services/product.service';
+import { ConfirmService } from 'src/app/_services/confirm.service';
 
 @Component({
   selector: 'app-products',
@@ -22,7 +23,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private productService: ProductService
+    private productService: ProductService,
+    private confirmService: ConfirmService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +53,29 @@ export class ProductsComponent implements OnInit {
         this.sortedData = this.dataSource.data.slice();
       }
     });
+  }
+
+  deleteProduct(product: Product) {
+    this.confirmService
+      .confirm(
+        'Confirm product deletion',
+        'Are you sure you want to delete ' + product.productName + '?'
+      )
+      .subscribe((result) => {
+        if (result) {
+          this.productService
+            .deleteProduct(product.productCode)
+            .subscribe(() => {
+              this.dataSource.data.splice(
+                this.dataSource.data.findIndex(
+                  (p) => p.productCode === product.productCode
+                )
+              );
+
+              this.sortedData = this.dataSource.data.slice();
+            });
+        }
+      });
   }
 
   sortData(sort: Sort) {
