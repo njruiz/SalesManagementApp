@@ -84,6 +84,16 @@
           </mat-form-field>
         </div>
 
+        <div class="mb-3">
+          <label for="formFile" class="form-label d-flex">Upload product image:</label>
+          <input
+            (change)="this.onFilechange($event)"
+            class="form-control"
+            type="file"
+            id="formFile"
+          />
+        </div>
+
         <mat-dialog-actions class="justify-content-end p-0">
           <div class="button-container">
             <button

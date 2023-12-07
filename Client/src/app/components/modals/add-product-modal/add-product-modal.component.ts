@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { environment } from 'src/environments/environment';
+import { UploadService } from 'src/app/_services/upload.service';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -11,17 +16,27 @@ import { ProductService } from 'src/app/_services/product.service';
   styleUrls: ['./add-product-modal.component.css'],
 })
 export class AddProductModalComponent implements OnInit {
+  user: User;
   productForm: FormGroup;
   options: string[] = ['Option 1', 'Option 2', 'Option 3'];
   sizes: string[] = ['Regular', 'Medium', 'Large'];
 
   filteredOptions: Observable<string[]>;
+  baseUrl = environment.apiUrl;
+
+  file: File = null;
 
   constructor(
+    private accountService: AccountService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddProductModalComponent>,
-    private productService: ProductService
-  ) {}
+    private productService: ProductService,
+    private uploadService: UploadService
+  ) {
+    this.accountService.currentUser$
+      .pipe(take(1))
+      .subscribe((user) => (this.user = user));
+  }
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
@@ -47,13 +62,15 @@ export class AddProductModalComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-    
     this.addProduct();
   }
 
   addProduct() {
     this.productService.addProduct(this.productForm.value).subscribe({
-      next: (response) => this.dialogRef.close(response),
+      next: (product) => {
+        this.upload(product.productCode);
+        this.dialogRef.close(product);
+      },
       error: (error) => console.log(error),
     });
   }
@@ -67,5 +84,16 @@ export class AddProductModalComponent implements OnInit {
 
   enableAddButton(): void {
     this.productForm.markAsTouched(); // Mark the control as touched to trigger validation
+  }
+
+  // File Upload
+  onFilechange(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  upload(productCode: string) {
+    if (this.file) {
+      this.uploadService.uploadfile(this.file, productCode).subscribe({});
+    }
   }
 }

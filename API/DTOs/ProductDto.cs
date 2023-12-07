@@ -1,3 +1,5 @@
+using API.Entities;
+
 namespace API.DTOs
 {
     public class ProductDto
@@ -10,5 +12,6 @@ namespace API.DTOs
         public string Size { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
+        public ICollection<PhotoProduct> Photos { get; set; }
     }
 }

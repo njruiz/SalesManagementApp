@@ -65,11 +65,14 @@ namespace API.Controllers
 
             return new UserDto
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 Username = user.UserName,
+                Email = user.Email,
+                Address = user.Address,
+                ContactNumber = user.ContactNumber,
                 Token = await _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-                FirstName = user.FirstName,
-                LastName = user.LastName
             };
         }
 

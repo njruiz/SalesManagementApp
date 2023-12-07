@@ -13,9 +13,12 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly DataContext _context;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPhotoService _photoService;
 
-        public ProductMaintenanceController(DataContext context, IMapper mapper, IUnitOfWork unitOfWork)
+        public ProductMaintenanceController(DataContext context, IMapper mapper,
+            IUnitOfWork unitOfWork, IPhotoService photoService)
         {
+            _photoService = photoService;
             _unitOfWork = unitOfWork;
             _context = context;
             _mapper = mapper;
@@ -61,7 +64,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{productCode}")]
-        public async Task<ActionResult> UpdateCharacter(ProductUpdateDto productUpdateDto, string productCode)
+        public async Task<ActionResult> UpdateProduct(ProductUpdateDto productUpdateDto, string productCode)
         {
             var product = await _unitOfWork.ProductRepository.GetProductAsync(productCode);
 
@@ -71,7 +74,7 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete()) return Ok(product);
 
-            return BadRequest("Failed to update user");
+            return BadRequest("Failed to update product");
         }
 
         [HttpDelete("delete-product/{productCode}")]
@@ -85,6 +88,34 @@ namespace API.Controllers
 
             await _unitOfWork.Complete();
             return Ok();
+        }
+
+        [HttpPost("{productCode}/add-photo")]
+        public async Task<ActionResult<PhotoProductDto>> AddPhoto(IFormFile file, string productCode)
+        {
+            var product = await _unitOfWork.ProductRepository.GetProductAsync(productCode);
+
+            if (product == null) return NotFound();
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new PhotoProduct
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            product.Photos.Add(photo);
+
+            if (await _unitOfWork.Complete())
+            {
+                return CreatedAtAction(nameof(GetProduct),
+                    new { productCode = product.ProductCode }, _mapper.Map<PhotoProductDto>(photo));
+            }
+
+            return BadRequest("Problem adding product photo");
         }
 
         private async Task<bool> ProductExists(string productCode)
