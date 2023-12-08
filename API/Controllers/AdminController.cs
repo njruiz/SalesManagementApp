@@ -1,4 +1,5 @@
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,14 @@ namespace API.Controllers
     public class AdminController : BaseApiController
     {
         private readonly UserManager<AppUser> _userManager;
-        public AdminController(UserManager<AppUser> userManager)
-        {
-            _userManager = userManager;
+        private readonly IPhotoService _photoService;
+        private readonly IUnitOfWork _unitOfWork;
 
+        public AdminController(UserManager<AppUser> userManager, IPhotoService photoService, IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+            _photoService = photoService;
+            _userManager = userManager;
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -60,6 +65,29 @@ namespace API.Controllers
         public ActionResult GetPhotosForModeration()
         {
             return Ok("Admins or moderators can see this");
+        }
+
+        [HttpPost("delete-product-photo/{productCode}")]
+        public async Task<ActionResult> DeleteProductPhoto(string productCode)
+        {
+            var photo = await _unitOfWork.PhotoRepository.GetProductPhotoByCode(productCode);
+
+            if (photo.PublicId != null)
+            {
+                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+                if (result.Result == "ok")
+                {
+                    _unitOfWork.PhotoRepository.RemoveProductPhoto(photo);
+                }
+            }
+            else
+            {
+                _unitOfWork.PhotoRepository.RemoveProductPhoto(photo);
+            }
+
+            await _unitOfWork.Complete();
+
+            return Ok();
         }
     }
 }

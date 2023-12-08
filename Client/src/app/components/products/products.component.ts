@@ -64,6 +64,9 @@ export class ProductsComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.productService
+            .deleteProductPhoto(product.productCode)
+            .subscribe();
+          this.productService
             .deleteProduct(product.productCode)
             .subscribe(() => {
               this.dataSource.data.splice(

@@ -26,7 +26,14 @@ export class ProductService {
       );
   }
 
-  deleteProduct(productCode) {
+  deleteProductPhoto(productCode: string) {
+    return this.http.post(
+      this.baseUrl + 'admin/delete-product-photo/' + productCode,
+      {}
+    );
+  }
+
+  deleteProduct(productCode: string) {
     return this.http.delete(
       this.baseUrl + 'productmaintenance/delete-product/' + productCode,
       {}

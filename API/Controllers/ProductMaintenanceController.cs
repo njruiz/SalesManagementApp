@@ -104,7 +104,8 @@ namespace API.Controllers
             var photo = new PhotoProduct
             {
                 Url = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
+                PublicId = result.PublicId,
+                ProductCode = productCode
             };
 
             product.Photos.Add(photo);
