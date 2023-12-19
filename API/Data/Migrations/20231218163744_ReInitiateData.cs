@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class SQlServerInitial : Migration
+    public partial class ReInitiateData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,6 +56,25 @@ namespace API.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Flavor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,6 +206,27 @@ namespace API.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Photos_Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_Product_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -230,6 +270,11 @@ namespace API.Data.Migrations
                 name: "IX_Photos_AppUserId",
                 table: "Photos",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_Product_ProductId",
+                table: "Photos_Product",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -254,10 +299,16 @@ namespace API.Data.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
+                name: "Photos_Product");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
         }
     }
 }
