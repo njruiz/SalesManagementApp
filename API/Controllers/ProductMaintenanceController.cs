@@ -70,7 +70,11 @@ namespace API.Controllers
 
             _mapper.Map(productUpdateDto, product);
 
-            _unitOfWork.ProductRepository.Update(product);
+            var result = _unitOfWork.ProductRepository.Update(product);
+            if (result) {
+                var photoProduct = await _unitOfWork.PhotoRepository.GetProductPhotoByCode(productCode);
+                _unitOfWork.PhotoRepository.UpdateProductCode(photoProduct, product.ProductCode);
+            }
 
             if (await _unitOfWork.Complete()) return Ok(product);
 

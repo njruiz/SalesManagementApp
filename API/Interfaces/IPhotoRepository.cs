@@ -8,5 +8,6 @@ namespace API.Interfaces
         Task<PhotoProduct> GetProductPhotoByCode(string productCode);
         void RemovePhoto(Photo photo);
         void RemoveProductPhoto(PhotoProduct photoProduct);
+        void UpdateProductCode(PhotoProduct photoProduct, string newProductCode);
     }
 }

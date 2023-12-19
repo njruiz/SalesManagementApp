@@ -34,5 +34,13 @@ namespace API.Data
         {
             _context.ProductPhotos.Remove(photo);
         }
+
+        public void UpdateProductCode(PhotoProduct photoProduct, string productCode)
+        {
+            photoProduct.ProductCode = productCode;
+
+            _context.Entry(photoProduct).State = EntityState.Modified;
+        }
+
     }
 }
