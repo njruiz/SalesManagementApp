@@ -26,6 +26,26 @@ export class ProductService {
       );
   }
 
+  deleteProductPhoto(productCode: string) {
+    return this.http.post(
+      this.baseUrl + 'admin/delete-product-photo/' + productCode,
+      {}
+    );
+  }
+
+  deleteProduct(productCode: string) {
+    return this.http.delete(
+      this.baseUrl + 'productmaintenance/delete-product/' + productCode,
+      {}
+    );
+  }
+
+  editProduct(product: Product, productCode: string) {
+    return this.http
+      .put(this.baseUrl + 'productmaintenance/' + productCode, product)
+      .pipe(map((response: Product[]) => response));
+  }
+
   getProducts() {
     if (this.products.length > 0) return of(this.products);
 

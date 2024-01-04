@@ -45,11 +45,21 @@ namespace API.Data
                 .ToListAsync();
         }
 
-        public void Update(Product product)
+        public bool Update(Product product)
         {
-            product.ProductName = GenerateProductName(product);
-            product.ProductCode = GenerateProductCode(product);
-            _context.Entry(product).State = EntityState.Modified;
+            try
+            {
+                product.ProductName = GenerateProductName(product);
+                product.ProductCode = GenerateProductCode(product);
+                _context.Entry(product).State = EntityState.Modified;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public string GenerateProductName(Product product)

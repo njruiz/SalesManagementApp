@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule.forRoot({
       type: 'ball-atom',
     }),
+    ModalModule.forRoot(),
   ],
-  exports: [BsDropdownModule, ToastrModule, NgxSpinnerModule],
+  exports: [BsDropdownModule, ToastrModule, NgxSpinnerModule, ModalModule],
 })
 export class SharedModule {}

@@ -6,7 +6,7 @@ namespace API.Interfaces
     public interface IProductRepository
     {
         void Delete(Product product);
-        void Update(Product product);
+        bool Update(Product product);
         string GenerateProductName(Product product);
         string GenerateProductCode(Product product);
         string Getinitials(String word);

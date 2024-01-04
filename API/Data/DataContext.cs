@@ -14,6 +14,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int,
     }
 
     public DbSet<Product> Products { get; set; }
+    public DbSet<Photo> Photos { get; set; }
+    public DbSet<PhotoProduct> ProductPhotos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

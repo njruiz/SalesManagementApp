@@ -9,24 +9,24 @@ namespace API.Controllers;
 [Authorize]
 public class UsersController : BaseApiController
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public UsersController(IUserRepository userRepository, IMapper mapper)
+    public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _mapper = mapper;
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
-        var users = await _userRepository.GetMembersAsync();
+        var users = await _unitOfWork.UserRepository.GetMembersAsync();
         return Ok(users);
     }
 
     [HttpGet("{username}")]
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
-        return await _userRepository.GetMemberAsync(username);
+        return await _unitOfWork.UserRepository.GetMemberAsync(username);
     }
 }

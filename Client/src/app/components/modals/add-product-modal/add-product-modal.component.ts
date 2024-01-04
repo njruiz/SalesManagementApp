@@ -9,6 +9,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { environment } from 'src/environments/environment';
 import { UploadService } from 'src/app/_services/upload.service';
+import { Product } from 'src/app/_models/product';
+import { ProductPhoto } from 'src/app/_models/productPhoto';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -18,6 +20,8 @@ import { UploadService } from 'src/app/_services/upload.service';
 export class AddProductModalComponent implements OnInit {
   user: User;
   productForm: FormGroup;
+  products: Partial<Product[]>;
+  categories: string[];
   options: string[] = ['Option 1', 'Option 2', 'Option 3'];
   sizes: string[] = ['Regular', 'Medium', 'Large'];
 
@@ -39,6 +43,9 @@ export class AddProductModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getProducts();
+    this.categories = this.getCategories(this.products);
+
     this.productForm = this.formBuilder.group({
       category: ['', Validators.required],
       flavor: ['', Validators.required],
@@ -68,22 +75,47 @@ export class AddProductModalComponent implements OnInit {
   addProduct() {
     this.productService.addProduct(this.productForm.value).subscribe({
       next: (product) => {
-        this.upload(product.productCode);
+        if (this.checkHasUploadedImage()) {
+          this.uploadService
+            .uploadProductPhoto(this.file, product.productCode)
+            .subscribe({
+              next: (productPhoto) => {
+                product.photoUrl = productPhoto.url;
+              },
+              error: (error) => console.log(error),
+            });
+        }
         this.dialogRef.close(product);
       },
       error: (error) => console.log(error),
     });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
+  checkHasUploadedImage(): boolean {
+    let flag = true;
+    if (!(<HTMLInputElement>document.getElementById('formFile')).value) {
+      flag = false;
+    }
+    return flag;
   }
 
   enableAddButton(): void {
     this.productForm.markAsTouched(); // Mark the control as touched to trigger validation
+  }
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
+
+  getCategories(products: Product[]) {
+    const allCategories: string[] = products
+      .map((product) => product.category) // Extract categories array for each product
+      .reduce((acc, categories) => acc.concat(categories), []) // Flatten the array
+      .filter((category, index, array) => array.indexOf(category) === index); // Remove duplicates
+
+    return allCategories;
   }
 
   // File Upload
@@ -91,9 +123,10 @@ export class AddProductModalComponent implements OnInit {
     this.file = event.target.files[0];
   }
 
-  upload(productCode: string) {
-    if (this.file) {
-      this.uploadService.uploadfile(this.file, productCode).subscribe({});
-    }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.categories.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 }

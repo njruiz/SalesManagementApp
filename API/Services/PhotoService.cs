@@ -48,5 +48,32 @@ namespace API.Services
 
             return await _cloudinary.DestroyAsync(deleteParams);
         }
+
+        public async Task<ImageUploadResult> UpdatePhotoAsync(IFormFile file, string publicId)
+        {
+            var uploadResult = new ImageUploadResult();
+
+            if (file.Length > 0)
+            {
+                // Delete the existing image with the same public ID
+                var deletionParams = new DeletionParams(publicId);
+                _cloudinary.Destroy(deletionParams);
+
+                using (var stream = file.OpenReadStream())
+                {
+                    var uploadParams = new ImageUploadParams
+                    {
+                        File = new FileDescription(file.FileName, stream),
+                        Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face"),
+                        Overwrite = true,
+                        Folder = "SalesManagement",
+                    };
+
+                    uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                }
+            }
+
+            return uploadResult;
+        }
     }
 }
