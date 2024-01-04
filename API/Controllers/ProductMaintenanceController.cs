@@ -63,6 +63,12 @@ namespace API.Controllers
 
         }
 
+        [HttpGet("{productCode}", Name = "GetProductPhoto")]
+        public async Task<ActionResult<PhotoProduct>> GetProductPhoto(string productCode)
+        {
+            return await _unitOfWork.PhotoRepository.GetProductPhotoByCode(productCode);
+        }
+
         [HttpPut("{productCode}")]
         public async Task<ActionResult> UpdateProduct(ProductUpdateDto productUpdateDto, string productCode)
         {
@@ -71,12 +77,20 @@ namespace API.Controllers
             _mapper.Map(productUpdateDto, product);
 
             var result = _unitOfWork.ProductRepository.Update(product);
-            if (result) {
-                var photoProduct = await _unitOfWork.PhotoRepository.GetProductPhotoByCode(productCode);
-                _unitOfWork.PhotoRepository.UpdateProductCode(photoProduct, product.ProductCode);
+            if (result)
+            {
+                if (product.Photos.Count > 0)
+                {
+                    var photoProduct = await _unitOfWork.PhotoRepository.GetProductPhotoByCode(productCode);
+                    _unitOfWork.PhotoRepository.UpdateProductCode(photoProduct, product.ProductCode);
+                }
             }
 
-            if (await _unitOfWork.Complete()) return Ok(product);
+            if (await _unitOfWork.Complete())
+            {
+                var products = await _unitOfWork.ProductRepository.GetProductsAsync();
+                return Ok(products);
+            }
 
             return BadRequest("Failed to update product");
         }
@@ -121,6 +135,30 @@ namespace API.Controllers
             }
 
             return BadRequest("Problem adding product photo");
+        }
+
+        [HttpPost("{productCode}/update-photo")]
+        public async Task<ActionResult<PhotoProductDto>> UpdatePhoto(IFormFile file, string productCode)
+        {
+            var photo = await _unitOfWork.PhotoRepository.GetProductPhotoByCode(productCode);
+
+            if (photo == null) return NotFound();
+
+            var updatedPhoto = await _photoService.UpdatePhotoAsync(file, photo.PublicId);
+
+            if (updatedPhoto != null)
+            {
+                _unitOfWork.PhotoRepository.UpdateProductPhoto(photo, updatedPhoto);
+            }
+
+            if (updatedPhoto.Error != null) return BadRequest(updatedPhoto.Error.Message);
+
+            if (await _unitOfWork.Complete())
+            {
+                return CreatedAtAction(nameof(GetProductPhoto),
+                    new { productCode = photo.ProductCode }, _mapper.Map<PhotoProductDto>(photo));
+            }
+            return Ok();
         }
 
         private async Task<bool> ProductExists(string productCode)

@@ -1,9 +1,18 @@
 <mat-card>
   <div class="container">
-    <mat-card-title>Add New Product</mat-card-title>
+    <mat-card-title>Edit Product</mat-card-title>
     <mat-card-content>
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="form-field">
+          <div class="product-img">
+            <img
+              class="border border-dark rounded"
+              title="Treattle-Logo"
+              src="{{
+                data.product.photoUrl || './assets/img/Treattle-Logo-v2.png'
+              }}"
+            />
+          </div>
           <mat-form-field appearance="outline">
             <mat-label>Category</mat-label>
             <input
@@ -16,7 +25,7 @@
               (optionSelected)="enableAddButton()"
             >
               <mat-option
-                *ngFor="let option of filteredOptions | async"
+                *ngFor="let option of categoryOptions | async"
                 [value]="option"
               >
                 {{ option }}
@@ -26,9 +35,6 @@
               >Category is required.</mat-error
             >
           </mat-form-field>
-        </div>
-
-        <div class="form-field">
           <mat-form-field appearance="outline">
             <mat-label>Flavor</mat-label>
             <input matInput formControlName="flavor" />
@@ -86,7 +92,7 @@
 
         <div class="mb-3">
           <label for="formFile" class="form-label d-flex"
-            >Upload product image:</label
+            >Upload new product image:</label
           >
           <input
             (change)="this.onFilechange($event)"
@@ -112,7 +118,7 @@
               type="submit"
               [disabled]="productForm.invalid"
             >
-              Add Product
+              Save
             </button>
           </div>
         </mat-dialog-actions>

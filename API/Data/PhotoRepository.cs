@@ -1,5 +1,6 @@
 using API.Entities;
 using API.Interfaces;
+using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -42,5 +43,12 @@ namespace API.Data
             _context.Entry(photoProduct).State = EntityState.Modified;
         }
 
+        public void UpdateProductPhoto(PhotoProduct photoProduct, ImageUploadResult updatedPhoto)
+        {
+            photoProduct.PublicId = updatedPhoto.PublicId;
+            photoProduct.Url = updatedPhoto.Url.ToString();
+
+            _context.Entry(photoProduct).State = EntityState.Modified;
+        }
     }
 }

@@ -40,6 +40,12 @@ export class ProductService {
     );
   }
 
+  editProduct(product: Product, productCode: string) {
+    return this.http
+      .put(this.baseUrl + 'productmaintenance/' + productCode, product)
+      .pipe(map((response: Product[]) => response));
+  }
+
   getProducts() {
     if (this.products.length > 0) return of(this.products);
 

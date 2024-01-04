@@ -1,4 +1,6 @@
+using API.DTOs;
 using API.Entities;
+using CloudinaryDotNet.Actions;
 
 namespace API.Interfaces
 {
@@ -9,5 +11,6 @@ namespace API.Interfaces
         void RemovePhoto(Photo photo);
         void RemoveProductPhoto(PhotoProduct photoProduct);
         void UpdateProductCode(PhotoProduct photoProduct, string newProductCode);
+        void UpdateProductPhoto(PhotoProduct photoProduct, ImageUploadResult updatedPhoto);
     }
 }

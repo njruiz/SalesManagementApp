@@ -19,6 +19,7 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../_modules/shared.module';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { EditProductModalComponent } from './modals/edit-product-modal/edit-product-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     AddOrderModalComponent,
     ProductCardComponent,
     ConfirmDialogComponent,
+    EditProductModalComponent,
   ],
   imports: [
     CommonModule,
